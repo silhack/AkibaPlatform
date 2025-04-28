@@ -126,7 +126,7 @@ export const servicesHome = [
     isBlue: true,
     titre: "Développement de produits",
     description:
-      "Nous vous accompagnons dans la formulation de produits agro-alimentaires et cosmétiques, en garantissant leur qualité et leur conformité tout au long du processus de transformation.",
+      "Nous vous accompagnons dans la formulation de produits agro-alimentaires & cosmétiques et dans la gestion opérationnelle des unités de transformation en garantissant leur qualité et conformité",
   },
   {
     icon: "src/assets/sales.png",
@@ -158,7 +158,7 @@ export const services = [
     reverse: false,
     titre: "Développement de produits",
     description:
-      "Nous développons des stratégies de mise en marché adaptées à vos produits, en vous guidant dans l'exportation et la conquête de nouveaux marchés à l'international.",
+      "Nous vous accompagnons dans la formulation de produits agro-alimentaires & cosmétiques et dans la gestion opérationnelle des unités de transformation en garantissant leur qualité et conformité",
     options: [
       "R&D, formulation et amélioration des produits",
       "Packaging et contrôle qualité",
