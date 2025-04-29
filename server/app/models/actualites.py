@@ -1,7 +1,6 @@
 from sqlmodel import SQLModel, Field
 import enum
 import uuid
-from typing import Optional
 
 # ACTUALITES MODELES
 
@@ -28,9 +27,9 @@ class ActualitesPublic(ActualitesBase):
   id: uuid.UUID
 
 class ActualitesUpdate(SQLModel):
-  image: Optional[str] = None
-  titre: Optional[str] = Field(default=None, index=True)
-  description: Optional[str] = None
-  source: Optional[str] = None
-  categorie: Optional[Categorie] = None
+  image: str | None = None
+  titre: str | None = None
+  description: str | None = None
+  source: str | None = None
+  categorie: Categorie | None = None
 

@@ -21,9 +21,9 @@ class ProduitsPublic(ProduitsBase):
   id: uuid.UUID
 
 class ProduitsUpdate(SQLModel):
-  image: Optional[str] = None
-  nom: Optional[str] = Field(default=None, index=True)
-  accroche: Optional[str] = None
-  description: Optional[str] = None
-  avantages: Optional[List[str]] = None
+  image: str | None = None
+  nom: str | None = None
+  accroche: str | None = None
+  description: str | None = None
+  avantages: List[str] | None = None
 

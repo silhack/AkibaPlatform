@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from app.database import init_db
 from contextlib import asynccontextmanager
 from app.routers import actualites, produits, contacts
@@ -10,6 +11,8 @@ async def lifespan(app: FastAPI):
   yield
 
 app = FastAPI(lifespan=lifespan)
+
+app.mount("/app/static", StaticFiles(directory="static"), name="static")
 
 #Configuration CORS
 app.add_middleware(
