@@ -5,7 +5,7 @@ export const expertiseData = [
     title: "Expertise sectorielle pointue",
     options: [
       "Maîtrise des dynamiques du secteur agroalimentaire et cosmétique en Afrique francophone",
-      "Expérience terrain avec des coopératives, PME et projets communautaires"
+      "Expérience terrain avec des coopératives, PME et projets communautaires",
     ],
     isBlue: true,
   },
@@ -13,7 +13,7 @@ export const expertiseData = [
     title: "Expertise technique et technologique ",
     options: [
       "Capacité à développer des solutions basées sur la data, l’IA et les plateformes digitales",
-      "Outils d’analyse prédictive (prix, marché, logistique)"
+      "Outils d’analyse prédictive (prix, marché, logistique)",
     ],
     isBlue: false,
   },
@@ -21,7 +21,7 @@ export const expertiseData = [
     title: "Accès à un réseau stratégique local et international",
     options: [
       "Mise en relation avec des institutions, partenaires financiers, clients",
-      "Approche partenariale orientée résultats"
+      "Approche partenariale orientée résultats",
     ],
     isBlue: true,
   },
@@ -29,7 +29,7 @@ export const expertiseData = [
     title: "Capacité d’analyse stratégique et de structuration de projets",
     options: [
       "Compréhension des besoins en financement et des logiques institutionnelles",
-      "Vision globale sur la chaîne de valeur : production, transformation, distribution, export"
+      "Vision globale sur la chaîne de valeur : production, transformation, distribution, export",
     ],
     isBlue: false,
   },
