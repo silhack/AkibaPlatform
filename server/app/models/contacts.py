@@ -1,6 +1,5 @@
 from sqlmodel import SQLModel, Field
 import uuid
-from typing import Optional
 
 # Contacts MODELES
 
@@ -21,8 +20,8 @@ class ContactsPublic(ContactsBase):
   id: uuid.UUID
 
 class ContactsUpdate(SQLModel):
-  nom: Optional[str] = None
-  email: Optional[str] = Field(default=None, index=True)
-  telephone: Optional[str] = None
-  objet: Optional[str] = None
-  message: Optional[str] = None
+  nom: str | None = None
+  email: str | None = None
+  telephone: str | None = None
+  objet: str | None = None
+  message: str | None = None
