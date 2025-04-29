@@ -1,0 +1,48 @@
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.pyd
+*.db
+
+# Environnement virtuel
+venv/
+env/
+
+# Fichiers de configuration de l'IDE
+.vscode/
+.idea/
+
+# Fichiers de dépendances
+*.egg-info/
+dist/
+build/
+
+# Fichiers de configuration locaux
+*.env
+
+# Migrations de base de données Alembic
+alembic/versions/*
+
+# Fichiers générés par les outils de packaging
+*.log
+*.bak
+*.swp
+
+# Fichiers Docker
+docker-compose.override.yml
+
+# Fichiers générés par FastAPI
+*.db
+
+# Fichiers de test (parfois utiles à exclure pour éviter de pousser les données de test)
+*.log
+
+# Exclusion des fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires
+*.tmp
+*.temp
