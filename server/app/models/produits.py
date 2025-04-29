@@ -5,7 +5,7 @@ from typing import Optional, List
 # PRODUITS MODELES
 
 class ProduitsBase(SQLModel):
-  image: str
+  image: str | None = None
   nom: str = Field(index=True)
   accroche: str
   description: str

@@ -11,7 +11,7 @@ class Categorie(str, enum.Enum):
   ETUDES = "Études"
 
 class ActualitesBase(SQLModel):
-  image: str
+  image: str | None = None
   titre: str = Field(index=True)
   description: str
   source: str
