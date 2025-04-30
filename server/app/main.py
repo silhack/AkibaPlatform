@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -15,7 +16,7 @@ app = FastAPI(lifespan=lifespan)
 
 os.makedirs("uploads", exist_ok=True)
 
-app.mount("/app/static", StaticFiles(directory="static"), name="static")
+BASE_DIR = Path(__file__).resolve().parent
 
 #Configuration CORS
 app.add_middleware(
@@ -25,6 +26,8 @@ app.add_middleware(
   allow_methods=["*"],
   allow_headers=["*"],
 )
+
+app.mount("/app/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
 #Configuration des routers
 app.include_router(actualites.router)
