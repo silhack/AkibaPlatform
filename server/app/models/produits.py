@@ -36,3 +36,13 @@ class ProduitsUpdate(SQLModel):
   description: str | None = None
   avantages: List[str] | None = None
 
+def convert_produit_to_public(produit: Produits) -> ProduitsPublic:
+  return ProduitsPublic(
+    id=produit.id,
+    image=produit.image,
+    nom=produit.nom,
+    accroche=produit.accroche,
+    description=produit.description,
+    avantages=[a.nom for a in produit.avantages]
+  )
+
