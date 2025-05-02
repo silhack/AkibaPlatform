@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { pathToImage } from "../../utils/utils";
 
 const ProduitCard = ({ id, image, nom, accroche, description, avantages }) => {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ const ProduitCard = ({ id, image, nom, accroche, description, avantages }) => {
 
   return (
     <div className="bg-white rounded-xl border  border-transparent hover:border-normal-blue/70 overflow-hidden flex flex-col transition duration-200">
-      <img src={image} alt={nom} loading="lazy" className="h-48 w-full object-cover" />
+      <img src={pathToImage(image)} alt={nom} loading="lazy" className="h-48 w-full object-cover" />
 
       <div className="p-5 flex flex-col justify-between flex-1">
         <div>

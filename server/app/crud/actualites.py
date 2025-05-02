@@ -1,6 +1,6 @@
 from sqlmodel import Session, delete, select
 from app.models.actualites import Actualites, ActualitesCreate, ActualitesUpdate
-from app.utils import save_image, delete_image_file
+from app.utils.utils_actualites import save_image, delete_image_file
 from fastapi import HTTPException, UploadFile
 import uuid
 

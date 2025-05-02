@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import axiosClient from "../../services/axiosClient";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
+    nom: "",
+    telephone: "",
     email: "",
     objet: "",
     message: "",
@@ -12,6 +13,7 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({});
   const [suggestions, setSuggestions] = useState([]);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const objetsList = [
     "Demande d'information",
@@ -46,37 +48,62 @@ const ContactForm = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Nom requis.";
-    if (!formData.phone.trim()) newErrors.phone = "Téléphone requis.";
+    if (!formData.nom.trim()) newErrors.nom = "Nom requis.";
+    if (!formData.telephone.trim()) newErrors.telephone = "Téléphone requis.";
     if (!formData.email.trim()) newErrors.email = "Email requis.";
     if (!formData.objet.trim()) newErrors.objet = "Objet requis.";
     if (!formData.message.trim()) newErrors.message = "Message requis.";
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log("Données envoyées :", formData);
-      // Ici tu peux envoyer les données à une API, EmailJS, etc.
+      try {
+        const response = await axiosClient.post("/contacts/mail", formData);
+        setSuccessMessage(response.data.message);
+        setFormData({
+          nom: "",
+          telephone: "",
+          email: "",
+          objet: "",
+          message: "",
+        });
+        setErrors({});
+
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 2000);
+      } catch (error) {
+        console.error(
+          "Erreur lors de l’envoi du message",
+          error.response?.data || error.message
+        );
+      }
     }
   };
   return (
     <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md mx-auto">
+      {successMessage && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+          {successMessage}
+        </div>
+      )}
+
       <div>
         <input
           type="text"
-          name="name"
+          name="nom"
           placeholder="Votre nom et prénoms"
-          value={formData.name}
+          value={formData.nom}
           onChange={handleChange}
           className="w-full p-3 outline-none border border-white bg-normal-orange placeholder-white text-white"
         />
-        {errors.name && (
-          <p className="text-sm text-red-100 mt-1">{errors.name}</p>
+        {errors.nom && (
+          <p className="text-sm text-red-100 mt-1">{errors.nom}</p>
         )}
       </div>
 
@@ -97,14 +124,14 @@ const ContactForm = () => {
       <div>
         <input
           type="tel"
-          name="phone"
+          name="telephone"
           placeholder="01-05-40-00-00"
-          value={formData.phone}
+          value={formData.telephone}
           onChange={handleChange}
           className="w-full p-3 outline-none border border-white bg-normal-orange placeholder-white text-white"
         />
-        {errors.phone && (
-          <p className="text-sm text-red-100 mt-1">{errors.phone}</p>
+        {errors.telephone && (
+          <p className="text-sm text-red-100 mt-1">{errors.telephone}</p>
         )}
       </div>
 

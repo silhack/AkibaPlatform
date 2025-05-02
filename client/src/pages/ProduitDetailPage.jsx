@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import ProduitForm from "../components/produits/ProduitForm";
-import { produits } from "../data/data";
+import axiosClient from "../services/axiosClient";
+import { pathToImage } from "../utils/utils";
 
 const ProduitDetailPage = () => {
+  const [produit, setProduit] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const produit = produits.find((p) => p.id === id);
+  useEffect(() => {
+    const fetchProduit = async () => {
+      try {
+        const response = await axiosClient(`/produits/${id}`);
+        setProduit(response.data);
+      } catch (error) {
+        setError(error.response?.data || "Erreur lors du chargement");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduit();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <section className="py-20 text-center">
+        <p className="text-gray-500">Chargement des produits...</p>
+      </section>
+    );
+  }
 
   if (!produit) {
     return (
@@ -25,13 +49,27 @@ const ProduitDetailPage = () => {
     );
   }
 
+  if (error) {
+    return (
+      <section className="py-20 text-center">
+        <p className="text-red-500">Erreur : {error}</p>
+        <button
+          onClick={() => navigate("/produits")}
+          className="bg-normal-blue text-white px-4 py-2 rounded hover:bg-normal-blue-hover transition"
+        >
+          Retour aux produits
+        </button>
+      </section>
+    );
+  }
+
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-3xl font-bold text-gray-900 mb-2">{produit.nom}</h1>
       <p className="text-lg italic text-gray-600 mb-4">{produit.accroche}</p>
 
       <img
-        src={produit.image}
+        src={pathToImage(produit.image)}
         alt={produit.nom}
         className="w-full max-w-xl rounded-lg mb-6"
       />

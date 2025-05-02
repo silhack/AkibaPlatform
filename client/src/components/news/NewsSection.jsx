@@ -1,16 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { articles, CATEGORIES } from "../../data/articles";
+import { CATEGORIES } from "../../data/articles";
+import axiosClient from "../../services/axiosClient";
 import ArticleCard from "./ArticleCard";
 
 const NewsSection = () => {
   const [filter, setFilter] = useState("Tous");
   const [search, setSearch] = useState("");
+  const [news, setNews] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const filteredArticles = articles.filter(
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await axiosClient.get("/actualites");
+        setNews(response.data);
+      } catch (error) {
+        setError(error.response?.data || "Erreur lors du chargement");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchNews();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-20 text-center">
+        <p className="text-gray-500">Chargement des produits...</p>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-20 text-center">
+        <p className="text-red-500">Erreur : {error}</p>
+      </section>
+    );
+  }
+
+  const filteredNews = news.filter(
     (article) =>
-      (filter === "Tous" || article.category === filter) &&
-      article.title.toLowerCase().includes(search.toLowerCase())
+      (filter === "Tous" || article.categorie === filter) &&
+      article.titre.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -35,8 +69,8 @@ const NewsSection = () => {
 
         {/* Articles */}
         <div className="grid md:grid-cols-2 gap-6">
-          {filteredArticles.length > 0 ? (
-            filteredArticles.map((article) => (
+          {filteredNews.length > 0 ? (
+            filteredNews.map((article) => (
               <ArticleCard key={article.id} article={article} />
             ))
           ) : (
