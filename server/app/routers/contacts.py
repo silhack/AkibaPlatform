@@ -1,7 +1,7 @@
 import uuid
 from fastapi import APIRouter, Depends, status
 from sqlmodel import Session
-from app.crud.contacts import create_contact, get_all_contacts, get_contact, update_contact, delete_contact, delete_all_contacts
+from app.crud.contacts import create_contact, get_all_contacts, get_contact, update_contact, delete_contact, delete_all_contacts, send_mail
 from app.database import get_db
 from app.models.contacts import ContactsCreate, ContactsPublic, ContactsUpdate
 
@@ -14,6 +14,11 @@ router = APIRouter(
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=ContactsPublic)
 def route_create_contact(contact: ContactsCreate, db: Session = Depends(get_db), ):
   return create_contact(db, contact)
+
+#POST - Envoi de mail à l'aide du formulaire de contact
+@router.post("/mail", status_code=status.HTTP_200_OK, response_model=dict)
+async def route_send_mail(contact: ContactsCreate, db: Session = Depends(get_db)):
+  return await send_mail(db, contact)
 
 #GET - Récuperer la liste des contacts depuis la DB
 @router.get("/", status_code=status.HTTP_200_OK, response_model=list[ContactsPublic])
@@ -39,3 +44,4 @@ def route_delete_contact(id_contact: uuid.UUID, db: Session = Depends(get_db)):
 @router.delete("/", status_code=status.HTTP_200_OK)
 def route_delete_contact(db: Session = Depends(get_db)):
   return delete_all_contacts(db)
+
