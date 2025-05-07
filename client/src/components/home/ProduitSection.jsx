@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Link } from "react-router";
-import { produits } from "../../data/data";
 import ProduitCard from "../ui/ProduitCard";
+import axiosClient from "../../services/axiosClient";
 
 // Animation fade up
 const fadeUp = {
@@ -12,6 +12,40 @@ const fadeUp = {
 };
 
 const ProduitsSection = () => {
+  const [produits, setProduits] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProduits = async () => {
+      try {
+        const response = await axiosClient.get("/produits");
+        setProduits(response.data);
+      } catch (error) {
+        setError(error.response?.data || "Erreur lors du chargement");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduits();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-20 text-center">
+        <p className="text-gray-500">Chargement des produits...</p>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-20 text-center">
+        <p className="text-red-500">Erreur : {error}</p>
+      </section>
+    );
+  }
+
   return (
     <section className="py-20 px-6 md:px-12 lg:px-16 bg-white">
       {/* Header */}

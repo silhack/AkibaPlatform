@@ -8,13 +8,14 @@ const IntroSolution = () => {
         Introduction à Akiba Platform
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <p className="text-gray-700 text-lg leading-relaxed">
-          Akiba Platform est une solution tout-en-un conçue pour aider les PME
-          agroalimentaires à se digitaliser, structurer leurs opérations et
-          accéder aux financements et aux marchés. Grâce à l'intelligence
-          artificielle et à l'analyse de données, elle permet aux entreprises de
-          gérer efficacement leurs activités, tout en facilitant leur croissance
-          et leur compétitivité.
+        <p className="text-gray-700 text-lg leading-relaxed text-justify">
+          Akiba Platform est une solution numérique de veille économique dédiée
+          au secteur agroalimentaire. Elle centralise automatiquement des
+          données fiables pour fournir des indicateurs clés (prix, production,
+          exportations) via des tableaux de bord intuitifs. Accessible et
+          adaptée au contexte local, elle aide les PME, coopératives et acteurs
+          agricoles à mieux comprendre le marché et à prendre des décisions
+          éclairées.
         </p>
         <img
           src={farmersImg}

@@ -11,7 +11,7 @@ const ArticleCard = ({ article }) => {
     <div className="bg-white shadow-sm rounded-lg overflow-hidden">
       <img
         src={pathToImage(article.image)}
-        alt={article.title}
+        alt={article.titre}
         className="w-full h-40 object-cover"
       />
       <div className="p-4">

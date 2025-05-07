@@ -3,12 +3,15 @@ import { FaSearch } from "react-icons/fa";
 import { CATEGORIES } from "../../data/articles";
 import axiosClient from "../../services/axiosClient";
 import ArticleCard from "./ArticleCard";
+import Pagination from "./pagination";
 
 const NewsSection = () => {
   const [filter, setFilter] = useState("Tous");
   const [search, setSearch] = useState("");
   const [news, setNews] = useState([]);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [newsPerPage] = useState(4);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,10 +28,25 @@ const NewsSection = () => {
     fetchNews();
   }, []);
 
+  const filteredNews = news.filter(
+    (article) =>
+      (filter === "Tous" || article.categorie === filter) &&
+      article.titre.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const indexOfLastNews = currentPage * newsPerPage;
+  const indexOfFirstNews = indexOfLastNews - newsPerPage;
+  const currentNews = filteredNews.slice(indexOfFirstNews, indexOfLastNews);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   if (loading) {
     return (
       <section className="py-20 text-center">
-        <p className="text-gray-500">Chargement des produits...</p>
+        <p className="text-gray-500">Chargement des actualties...</p>
       </section>
     );
   }
@@ -41,16 +59,10 @@ const NewsSection = () => {
     );
   }
 
-  const filteredNews = news.filter(
-    (article) =>
-      (filter === "Tous" || article.categorie === filter) &&
-      article.titre.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
     <section className="px-6 md:px-12 lg:px-16 py-10 grid grid-cols-1 lg:grid-cols-4 gap-8">
       <div className="lg:col-span-3">
-        <div className="flex space-x-4 mb-6">
+        <div className="flex flex-wrap gap-4 mb-6">
           {CATEGORIES.map((item) => (
             <button
               key={item}
@@ -69,8 +81,8 @@ const NewsSection = () => {
 
         {/* Articles */}
         <div className="grid md:grid-cols-2 gap-6">
-          {filteredNews.length > 0 ? (
-            filteredNews.map((article) => (
+          {currentNews.length > 0 ? (
+            currentNews.map((article) => (
               <ArticleCard key={article.id} article={article} />
             ))
           ) : (
@@ -79,6 +91,12 @@ const NewsSection = () => {
             </p>
           )}
         </div>
+        <Pagination
+          totalNews={news.length}
+          newsPerPage={newsPerPage}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
       </div>
 
       <div className="lg:col-span-1">

@@ -226,23 +226,72 @@ export const whyUs = [
   },
 ];
 
-export const steps = [
+export const features = [
   {
-    number: "01",
-    title: "Inscription",
-    description: "Création d’un compte entreprise",
+    isBlue: true,
+    title: "Collecte automatisée",
+    description:
+      "Récupération automatique de données économiques issues de sources fiables telles que les actualités, rapports et bases de données publiques.",
   },
   {
-    number: "02",
-    title: "Configuration",
-    description: "Ajout des informations clés sur l’activité",
+    isBlue: false,
+    title: "Analyse sectorielle",
+    description:
+      "Extraction et structuration de données clés comme les prix, les volumes de production ou les flux d'import/export.",
   },
   {
-    number: "03",
-    title: "Utilisation des outils",
-    description: "Gestion, analyse et financement",
+    isBlue: true,
+    title: "Visualisation des données",
+    description:
+      "Tableaux de bord clairs et graphiques interactifs pour suivre les tendances et indicateurs du secteur agro.",
+  },
+  {
+    isBlue: false,
+    title: "Outils de recherche",
+    description:
+      "Filtres, recherche par mots-clés et navigation intuitive pour faciliter l’accès rapide à l’information recherchée.",
+  },
+  {
+    isBlue: true,
+    title: "Interface intuitive",
+    description:
+      "Conception pensée pour les utilisateurs non techniques, avec un affichage clair, accessible et multilingue (dont langues locales).",
   },
 ];
+
+export const steps = [
+  {
+    number: "1",
+    title: "Collecte des données",
+    description: "Akiba Platform récupère automatiquement des données économiques à partir de sources fiables telles que les bases publiques, les actualités spécialisées et les rapports officiels.",
+  },
+  {
+    number: "2",
+    title: "Traitement et structuration",
+    description: "Les données brutes sont nettoyées, analysées et structurées afin d'extraire des indicateurs clés du secteur agroalimentaire.",
+  },
+  {
+    number: "3",
+    title: "Analyse et synthèse",
+    description: "Les tendances économiques sont interprétées automatiquement pour offrir une compréhension simplifiée et utile aux utilisateurs.",
+  },
+  {
+    number: "4",
+    title: "Visualisation intuitive",
+    description: "Les données sont affichées de manière claire sous forme de graphiques, tableaux de bord interactifs et cartes visuelles.",
+  },
+  {
+    number: "5",
+    title: "Exploration et filtrage",
+    description: "L'utilisateur peut filtrer les données par région, période, type de produit ou autre critère pertinent pour son activité.",
+  },
+  {
+    number: "6",
+    title: "Accessibilité multilingue",
+    description: "La plateforme est accessible en français et dans des langues locales ivoiriennes pour faciliter l’inclusion numérique.",
+  },
+];
+
 
 export const faqs = [
   {

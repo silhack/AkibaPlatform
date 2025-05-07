@@ -1,5 +1,6 @@
 import React from "react";
-import CardSolution from "./CardSolution";
+import CardFeatures from "./CardFeatures";
+import { features } from "../../data/data";
 
 const Features = () => {
   return (
@@ -7,7 +8,7 @@ const Features = () => {
       <h2 className="text-normal-orange text-2xl md:text-3xl font-bold text-center mb-6">
         Fonctionnalités clés
       </h2>
-      <CardSolution />
+      <CardFeatures features={features} />
     </section>
   );
 };
