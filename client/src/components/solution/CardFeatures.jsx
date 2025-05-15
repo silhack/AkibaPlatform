@@ -1,12 +1,7 @@
-import React from "react";
-
-const CardFeatures = ({ features }) => {
+const CardFeatures = ({ feature }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-10">
-      {features.map((feature, index) => (
-        <div
-          key={index}
-          className={`
+    <div
+      className={`
             bg-white rounded-xl p-6 text-center transition-all duration-300
             border border-transparent 
             hover:border ${
@@ -21,17 +16,15 @@ const CardFeatures = ({ features }) => {
                 : "hover:shadow-[0_4px_12px_rgba(251,146,60,0.15)]"
             }
           `}
-        >
-          <h3
-            className={`text-lg font-semibold ${
-              feature.isBlue ? "text-normal-blue" : "text-normal-orange"
-            } mb-2`}
-          >
-            {feature.title}
-          </h3>
-          <p className="text-gray-700 text-sm">{feature.description}</p>
-        </div>
-      ))}
+    >
+      <h3
+        className={`text-lg font-semibold ${
+          feature.isBlue ? "text-normal-blue" : "text-normal-orange"
+        } mb-2`}
+      >
+        {feature.title}
+      </h3>
+      <p className="text-gray-700 text-sm">{feature.description}</p>
     </div>
   );
 };

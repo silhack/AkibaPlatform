@@ -1,5 +1,3 @@
-import React from "react";
-
 const CardUs = ({ title, options, isBlue }) => {
   return (
     <div

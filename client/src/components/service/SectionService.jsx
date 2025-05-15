@@ -1,13 +1,5 @@
-import React from "react";
 import { services } from "../../data/data";
 import CardService from "./CardService";
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
 
 const SectionService = () => {
   return (
@@ -17,16 +9,7 @@ const SectionService = () => {
       </h2>
       <div className="flex flex-col gap-6">
         {services.map((service, index) => (
-          <motion.div
-            key={index}
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <CardService {...service} />
-          </motion.div>
+          <CardService key={index} {...service} />
         ))}
       </div>
     </section>

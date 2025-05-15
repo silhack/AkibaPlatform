@@ -1,15 +1,38 @@
-import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import farmersImg from "../../assets/farmers.png";
-import { expertiseData } from "../../data/data";
+import { expertiseData, valeurs } from "../../data/data";
 import CardUs from "./CardUs";
 import IntroUs from "./IntroUs";
 
 const textStyle = "text-gray-700 text-lg leading-relaxed";
 
+const fadeLeft = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
+
 const AboutUs = () => {
   return (
     <section className="container mx-auto px-6 md:px-12 lg:px-16 py-16">
-      <div className="text-center max-w-2xl mx-auto">
+      <motion.div
+        className="text-center max-w-2xl mx-auto"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        transition={{ duration: 0.4 }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <h2 className="text-normal-orange text-2xl md:text-3xl font-bold mb-4">
           Qui sommes-nous ?
         </h2>
@@ -25,10 +48,17 @@ const AboutUs = () => {
           offrons des solutions simples, performantes et adaptées aux réalités
           du terrain.
         </p>
-      </div>
+      </motion.div>
 
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 mt-12">
-        <div className="max-w-2xl">
+        <div
+          className="max-w-2xl"
+          variants={fadeLeft}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <IntroUs
             title={"Notre mission et nos valeurs"}
             subtitle={
@@ -36,35 +66,33 @@ const AboutUs = () => {
             }
           />
           <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>
-              <strong>Innovation :</strong> Exploiter la puissance des données
-              et de l'IA pour des solutions performantes.
-            </li>
-            <li>
-              <strong>Impact :</strong> Favoriser la sécurité alimentaire et la
-              croissance économique en Afrique.
-            </li>
-            <li>
-              <strong>Expertise et accompagnement :</strong> Offrir un conseil
-              stratégique et technique sur mesure.
-            </li>
-            <li>
-              <strong>Collaboration :</strong> Travailler avec des partenaires
-              locaux et internationaux pour maximiser les opportunités.
-            </li>
-            <li>
-              <strong>Transparence et éthique :</strong> Assurer la fiabilité et
-              la sécurité des données de nos clients.
-            </li>
+            {valeurs.map((valeur, index) => (
+              <motion.li
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <strong>{valeur.label} :</strong> {valeur.description}
+              </motion.li>
+            ))}
           </ul>
         </div>
-        <div className="flex justify-center w-full lg:w-auto">
+        <motion.div
+          className="flex justify-center w-full lg:w-auto"
+          variants={fadeRight}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <img
             src={farmersImg}
             alt="Groupe d’agriculteurs africains souriants dans un champ"
             className="w-full h-92 max-w-md rounded-lg shadow-sm object-cover"
           />
-        </div>
+        </motion.div>
       </div>
 
       <div className="flex flex-col items-center lg:items-start gap-6 mt-12">
@@ -76,7 +104,16 @@ const AboutUs = () => {
         />
         <div className="grid md:grid-cols-2 gap-6">
           {expertiseData.map((item, index) => (
-            <CardUs key={index} {...item} />
+            <motion.div
+              key={index}
+              variants={index % 2 === 0 ? fadeLeft : fadeRight}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <CardUs {...item} />
+            </motion.div>
           ))}
         </div>
       </div>

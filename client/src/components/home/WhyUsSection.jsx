@@ -1,4 +1,3 @@
-import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { whyUs } from "../../data/data";
@@ -40,7 +39,7 @@ const WhyUsSection = () => {
       </motion.div>
 
       {/* Grille des éléments */}
-      <div className="grid gap-10 sm:grid-cols-2 items-center mt-5 lg:grid-cols-3">
+      <div className="grid gap-10 lg:grid-cols-2 items-center mt-5 xl:grid-cols-3">
         {whyUs.map((element, index) => (
           <motion.div
             key={index}

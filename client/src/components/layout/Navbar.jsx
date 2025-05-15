@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BsTelephone } from "react-icons/bs";
-import { FaFacebookF, FaGlobe, FaLinkedinIn, FaTimes } from "react-icons/fa";
+import { FaFacebookF, FaGlobe, FaLinkedinIn } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineMailOutline } from "react-icons/md";
-import { NavLink } from "react-router"; // Correction ici
+import { RxCross2 } from "react-icons/rx";
+import { Link, NavLink } from "react-router";
+import { infoContacts } from "../../data/config";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,17 +33,28 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-3 items-center">
           <div className="flex space-x-2 items-center">
             <MdOutlineMailOutline />
-            <a href="mailto:info@akibasolution.com">info@akibasolution.com</a>
+            <a href={`mailto:${infoContacts.email}`}>{infoContacts.email}</a>
           </div>
           <h4>|</h4>
           <div className="flex space-x-2 items-center">
             <BsTelephone />
-            <a href="/">+225 0123456789</a>
+            <a href="/">{infoContacts.phone_civ}</a>
+          </div>
+          <h4>|</h4>
+          <div className="flex space-x-2 items-center">
+            <BsTelephone />
+            <a href="/">{infoContacts.phone_fr}</a>
           </div>
         </div>
         <div className="flex space-x-3 items-center">
           <FiInstagram className="cursor-pointer hover:text-gray-300 transition" />
-          <FaLinkedinIn className="cursor-pointer hover:text-gray-300 transition" />
+          <Link to={infoContacts.linkedIn} target="_blank">
+            <FaLinkedinIn
+              title="LinkedIn"
+              aria-label="LinkedIn"
+              className="cursor-pointer hover:text-gray-300 transition"
+            />
+          </Link>
           <FaFacebookF className="cursor-pointer hover:text-gray-300 transition" />
           <div className="flex space-x-2 items-center cursor-pointer">
             <FaGlobe />
@@ -155,7 +168,7 @@ const Navbar = () => {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-2xl"
+          className="md:hidden text-2xl p-2 rounded hover:text-normal-blue hover:bg-gray-100 transition"
         >
           <HiOutlineMenuAlt1 />
         </button>
@@ -168,9 +181,9 @@ const Navbar = () => {
       >
         <button
           onClick={() => setMenuOpen(false)}
-          className="absolute top-4 right-4 text-2xl"
+          className="absolute top-4 right-4 text-2xl p-2 rounded hover:text-normal-blue hover:bg-gray-100  transition"
         >
-          <FaTimes />
+          <RxCross2 />
         </button>
         <div className="flex flex-col items-center space-y-6 py-5 mt-12 text-center">
           <NavLink

@@ -1,7 +1,8 @@
 import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useLocation, Navigate } from "react-router";
+import Layout from "./components/Layout/Layout";
 
-// Chargement dynamique des pages
+// Pages dynamiques
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const SolutionPage = lazy(() => import("./pages/SolutionPage"));
@@ -11,23 +12,30 @@ const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ServicePage = lazy(() => import("./pages/ServicePage"));
 const ProduitPage = lazy(() => import("./pages/ProduitPage"));
 const ProduitDetailPage = lazy(() => import("./pages/ProduitDetailPage"));
-
-// Importation du Layout
-import Layout from "./components/Layout/Layout";
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 function App() {
+  const location = useLocation();
+
+  const noLayoutRoutes = ["/404"];
+  const isNoLayout = noLayoutRoutes.includes(location.pathname);
+
   return (
-    <>
-      <Suspense
-        fallback={
-          <div className="flex justify-center items-center min-h-screen">
-            Loading
-          </div>
-        }
-      >
+    <Suspense
+      fallback={
+        <div className="flex justify-center items-center min-h-screen">
+          Chargement...
+        </div>
+      }
+    >
+      {isNoLayout ? (
+        <Routes>
+          <Route path="/404" element={<NotFoundPage />} />
+        </Routes>
+      ) : (
         <Layout>
           <Routes>
-            <Route path="/" index element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/solution" element={<SolutionPage />} />
             <Route path="/services" element={<ServicePage />} />
             <Route path="/produits" element={<ProduitPage />} />
@@ -36,10 +44,11 @@ function App() {
             <Route path="/actualites/:id" element={<ArticleDetail />} />
             <Route path="/a-propos" element={<AboutPage />} />
             <Route path="/contacts" element={<ContactPage />} />
+            <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
         </Layout>
-      </Suspense>
-    </>
+      )}
+    </Suspense>
   );
 }
 

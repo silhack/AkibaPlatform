@@ -1,4 +1,3 @@
-import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import ComImg from "../../assets/ComProf.png";
@@ -37,7 +36,7 @@ const CommentSection = () => {
     <section className="py-16 px-6 md:px-12 lg:px-16 bg-white">
       {/* Titre */}
       <motion.h2
-        className="text-normal-orange text-lg font-bold md:text-2xl mb-4 uppercase"
+        className="text-normal-orange text-sm font-bold md:text-md mb-4 uppercase"
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
@@ -48,7 +47,7 @@ const CommentSection = () => {
 
       {/* Sous-titre */}
       <motion.p
-        className="md:w-1/2 text-base md:text-lg mb-8"
+        className="md:w-1/2 text-xl md:text-2xl mb-8 font-medium"
         variants={fadeUp}
         custom={1}
         initial="hidden"

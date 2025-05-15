@@ -231,7 +231,7 @@ export const features = [
     isBlue: true,
     title: "Collecte automatisée",
     description:
-      "Récupération automatique de données économiques issues de sources fiables telles que les actualités, rapports et bases de données publiques.",
+      "Récupération automatique de données économiques issues de sources fiables telles que les actualités, rapports et bases de données.",
   },
   {
     isBlue: false,
@@ -256,6 +256,29 @@ export const features = [
     title: "Interface intuitive",
     description:
       "Conception pensée pour les utilisateurs non techniques, avec un affichage clair, accessible et multilingue (dont langues locales).",
+  },
+];
+
+export const valeurs = [
+  {
+    label: "Innovation",
+    description: "Exploiter la puissance des données et de l'IA pour des solutions performantes.",
+  },
+  {
+    label: "Impact",
+    description: "Favoriser la sécurité alimentaire et la croissance économique en Afrique.",
+  },
+  {
+    label: "Expertise et accompagnement",
+    description: "Offrir un conseil stratégique et technique sur mesure.",
+  },
+  {
+    label: "Collaboration",
+    description: "Travailler avec des partenaires locaux et internationaux pour maximiser les opportunités.",
+  },
+  {
+    label: "Transparence et éthique",
+    description: "Assurer la fiabilité et la sécurité des données de nos clients.",
   },
 ];
 

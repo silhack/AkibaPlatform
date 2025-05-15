@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Link } from "react-router";
@@ -57,7 +57,7 @@ const ProduitsSection = () => {
         transition={{ duration: 0.7 }}
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-normal-orange text-lg font-bold md:text-2xl uppercase">
+        <h2 className="text-normal-orange text-sm font-bold md:text-md uppercase">
           Nos Produits
         </h2>
         <Link
@@ -70,7 +70,7 @@ const ProduitsSection = () => {
 
       {/* Sous-texte */}
       <motion.p
-        className="md:w-1/2 text-base md:text-lg mb-8"
+        className="md:w-1/2 text-xl md:text-2xl mb-8 font-medium"
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"

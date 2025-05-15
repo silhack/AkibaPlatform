@@ -3,6 +3,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaEnvelope, FaPhone } from "react-icons/fa6";
 import ContactForm from "./ContactForm";
 import ContactInfo from "./ContactInfo";
+import { infoContacts } from "../../data/config";
 
 const ContactSection = () => {
   return (
@@ -16,21 +17,20 @@ const ContactSection = () => {
           <ContactInfo
             Icon={FaMapMarkerAlt}
             titre="Adresse"
-            text="28 BP 437 Abidjan 28, Cocody Angré 7è Tranche"
+            text={infoContacts.adresse}
           />
           <ContactInfo
             Icon={FaPhone}
             titre="Téléphone"
-            text="+ (225) 08 33 45 63 / + (33) 7 53 34 25 98"
+            text={`${infoContacts.phone_civ} / ${infoContacts.phone_fr} `}
           />
           <ContactInfo
             Icon={FaEnvelope}
             titre="Email"
-            text="info@akibasolution.com"
+            text={infoContacts.email}
           />
         </div>
 
-        {/* Colonne droite : Formulaire */}
         <div className="bg-normal-orange p-8 flex flex-col text-base justify-center">
           <ContactForm />
         </div>

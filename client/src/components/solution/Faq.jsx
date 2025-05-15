@@ -1,9 +1,22 @@
-import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import { faqs } from "../../data/data";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const FAQ = () => {
   return (
-    <section className="container mx-auto px-6 md:px-12 lg:px-16 py-12">
+    <motion.section
+      className="container mx-auto px-6 md:px-12 lg:px-16 py-12"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6 }}
+    >
       <h2 className="text-center text-xl md:text-2xl font-bold text-normal-orange mb-8">
         Questions fréquentes
       </h2>
@@ -32,7 +45,7 @@ const FAQ = () => {
           </div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

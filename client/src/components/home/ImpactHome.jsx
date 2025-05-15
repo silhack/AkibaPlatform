@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import React from "react";
 import { LogoGrid } from "./LogoSection";
 
 const slideUp = {
@@ -14,7 +13,7 @@ const ImpactHome = () => {
     <section className="py-6 px-6 md:px-12 lg:px-16 mx-auto">
       <div className="">
         <motion.h2
-          className="text-normal-orange text-lg font-bold md:text-2xl mb-4 uppercase"
+          className="text-normal-orange text-sm font-bold md:text-md mb-4 uppercase"
           variants={slideUp}
           initial="hidden"
           whileInView="visible"
@@ -25,7 +24,7 @@ const ImpactHome = () => {
         </motion.h2>
 
         <motion.p
-          className="md:w-1/2 text-base md:text-lg mb-8"
+          className="md:w-1/2 text-xl md:text-2xl mb-8 font-medium"
           variants={slideUp}
           initial="hidden"
           whileInView="visible"

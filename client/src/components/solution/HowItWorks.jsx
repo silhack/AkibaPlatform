@@ -1,5 +1,12 @@
-import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import { steps } from "../../data/data";
+import StepCard from "./StepCard";
+
+const slideUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const HowItWorks = () => {
   return (
@@ -9,18 +16,16 @@ const HowItWorks = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
         {steps.map((step, index) => (
-          <div
+          <motion.div
             key={index}
-            className="p-6 rounded-lg space-y-4 hover:bg-light-blue transition"
+            variants={slideUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
           >
-            <h3 className="text-5xl font-bold text-normal-orange">
-              {step.number}
-            </h3>
-            <h4 className="text-lg font-semibold text-normal-blue">
-              {step.title}
-            </h4>
-            <p className="text-gray-600">{step.description}</p>
-          </div>
+            <StepCard step={step} />
+          </motion.div>
         ))}
       </div>
     </section>

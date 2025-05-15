@@ -1,8 +1,6 @@
-import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { servicesHome } from "../../data/data";
-import { Link } from "react-router";
 import ServiceCard from "./ServiceCard";
 
 // Animation fadeUp simple
@@ -11,12 +9,22 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 },
 };
 
+const fadeLeft = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0 },
+};
+
 const ServiceSection = () => {
   return (
     <section className="py-10 px-6 md:px-12 lg:px-16 bg-white">
       {/* Header Section */}
       <h2
-        className="text-normal-orange text-lg font-bold md:text-2xl mb-4 uppercase"
+        className="text-normal-orange text-sm font-bold md:text-md mb-4 uppercase"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -27,7 +35,7 @@ const ServiceSection = () => {
       </h2>
 
       <motion.p
-        className="md:w-1/2 text-base md:text-lg mb-8"
+        className="md:w-1/2 text-xl md:text-2xl mb-8 font-medium"
         initial="hidden"
         whileInView="visible"
         transition={{ duration: 0.8, delay: 0.2 }}
@@ -39,15 +47,15 @@ const ServiceSection = () => {
       </motion.p>
 
       {/* Cartes de services */}
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-2">
+      <div className="grid gap-10 lg:grid-cols-2">
         {servicesHome.map((service, index) => (
           <motion.div
             key={index}
-            variants={fadeUp}
+            variants={index % 2 === 0 ? fadeLeft : fadeRight}
             initial="hidden"
             whileInView="visible"
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: index * 0.1 }}
+            viewport={{ once: true, amount: 0.2 }}
           >
             <ServiceCard {...service} />
           </motion.div>
