@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from sqlmodel import Session, select
 from app.models.produits import Produits, ProduitsCreate, ProduitsUpdate, Avantage
 from app.utils.utils_produits import save_image, delete_image_file
@@ -73,6 +74,8 @@ def update_produit(
         for avantage in nouveaux_avantages:
             if avantage not in db_produit.avantages:
                 db_produit.avantages.append(avantage)
+
+    update_data["updated_at"] = datetime.now(timezone.utc)
 
     db_produit.sqlmodel_update(update_data)
 

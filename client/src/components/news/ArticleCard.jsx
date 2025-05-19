@@ -7,6 +7,11 @@ const ArticleCard = ({ article }) => {
 
   const goToDetail = () => navigate(`${article.id}`);
 
+  const splitText = (text) => {
+    return text.split(".")[0];
+  }
+
+
   return (
     <div className="bg-white shadow-sm rounded-lg overflow-hidden">
       <img
@@ -20,7 +25,7 @@ const ArticleCard = ({ article }) => {
         </p>
         <h3 className="font-bold text-lg mt-1">{article.titre}</h3>
         <p className="text-gray-600 mt-2 text-sm">
-          {article.description}
+          {splitText(article.description)}
         </p>
         <button
           onClick={goToDetail}

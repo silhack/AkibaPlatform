@@ -35,3 +35,4 @@ app.include_router(produits.router)
 @app.get("/")
 def read_root():
   return {"message": "Bienvenue: API is running 🚀"}
+

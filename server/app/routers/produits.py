@@ -21,7 +21,7 @@ def route_create_produit(
     nom: str = Form(...),
     description: str = Form(...),
     accroche: str = Form(...),
-    avantages: list[str] = Form([]),
+    avantages: list[str] = Form(...),
     image: UploadFile = File(None),
     db: Session = Depends(get_db)
 ):
