@@ -7,7 +7,7 @@ __pycache__/
 *.db
 
 # Environnement virtuel
-venv/
+.venv/
 env/
 
 # Fichiers de configuration de l'IDE

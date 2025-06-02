@@ -56,7 +56,7 @@ Crée un fichier `.env` à la racine du projet et configure les variables néces
 ## Initialiser la base de données
 
 ```bash
-alembic upgrade head
+ alembic upgrade head
 ```
 
 > Assurez-vous d'avoir configuré `alembic.ini` et `env.py` correctement.
@@ -98,3 +98,13 @@ pip freeze > requirements.txt
 ## Auteur
 
 Projet développé par **Akiba Solution — [www.akibasolution.com](http://www.akibasolution.com)**.
+
+
+list des command pour la base de donnée
+
+- create database akiba_db
+- create user postgres with encrypted password 'password'
+- create database akiba_db owner postgres;
+- grant all privileges on database akiba_db to postgres
+- ALTER SCHEMA public owner to postgres;
+- GRANT USAGE, CREATE ON SCHEMA public TO postgres;
