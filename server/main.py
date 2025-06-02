@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from app.database import init_db
 from contextlib import asynccontextmanager
 from app.routers import actualites, produits, contacts
+import uvicorn
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -36,3 +37,5 @@ app.include_router(produits.router)
 def read_root():
   return {"message": "Bienvenue: API is running 🚀"}
 
+if __name__ == "__main__":
+  uvicorn.run(app, host="0.0.0.0", port=8000)
