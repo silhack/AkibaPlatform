@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router";
 import axiosClient from "../services/axiosClient";
 import { pathToImage } from "../utils/utils";
 
 const ArticleDetail = () => {
   const [article, setArticle] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { id } = useParams();
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +25,6 @@ const ArticleDetail = () => {
     fetchProduit();
   }, [id]);
 
-
   if (loading) {
     return (
       <section className="py-20 text-center">
@@ -38,13 +37,13 @@ const ArticleDetail = () => {
     return (
       <div className="p-6 text-center">
         <h2 className="text-2xl font-bold text-red-600 mb-4">
-          Produit introuvable
+          Article introuvable
         </h2>
         <button
-          onClick={() => navigate("/produits")}
+          onClick={() => navigate("/actualites")}
           className="bg-normal-blue text-white px-4 py-2 rounded hover:bg-normal-blue-hover transition"
         >
-          Retour aux produits
+          Retour aux actualités
         </button>
       </div>
     );
@@ -74,6 +73,16 @@ const ArticleDetail = () => {
         className="w-full h-auto my-6 rounded-md"
       />
       <p className="text-lg leading-relaxed">{article.description}</p>
+      <p className="text-xl font-medium mt-4">Références</p>
+      <ul className="list-disc list-inside space-y-1 text-sm text-gray-600">
+        {article.sources.map((source, index) => (
+          <Link to={source} target="_blank">
+            <li className="text-base hover:text-normal-blue hover:underline" key={index}>
+              {source}
+            </li>
+          </Link>
+        ))}
+      </ul>
     </section>
   );
 };

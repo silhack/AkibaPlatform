@@ -16,7 +16,7 @@ def save_image(image: UploadFile) -> str:
 
     file_ext = Path(image.filename).suffix.lower()
     if file_ext not in ALLOWED_EXTENSIONS:
-        raise ValueError(f"Extension non autorisée : {file_ext}")
+        raise ValueError(f"L'extension non autorisée. : {file_ext}")
 
     # Lire le contenu pour vérifier la taille
     content = image.file.read()

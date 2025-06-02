@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from pathlib import Path
 import uuid
 import os
@@ -50,6 +51,7 @@ def update_contact(db: Session, id_contact: uuid.UUID, contact: ContactsUpdate):
   if not db_contact:
     raise HTTPException(status_code=404, detail="Contact inexistant")
   contact_data = contact.model_dump(exclude_unset=True)
+  contact_data["updated_at"] = datetime.now(timezone.utc)
   db_contact.sqlmodel_update(contact_data)
   db.add(db_contact)
   db.commit()

@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Route, Routes, useLocation, Navigate } from "react-router";
 import Layout from "./components/layout/Layout";
 
+
 // Pages dynamiques
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
@@ -13,11 +14,18 @@ const ServicePage = lazy(() => import("./pages/ServicePage"));
 const ProduitPage = lazy(() => import("./pages/ProduitPage"));
 const ProduitDetailPage = lazy(() => import("./pages/ProduitDetailPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const AdminPage = lazy(() => import("./pages/AdminPage"));
+
+const ActualitesTab = lazy(() =>
+  import("./components/admin-panel/ActualitesTab")
+);
+const ProduitsTab = lazy(() => import("./components/admin-panel/ProduitsTab"));
+const ContactsTab = lazy(() => import("./components/admin-panel/ContactsTab"));
 
 function App() {
   const location = useLocation();
 
-  const noLayoutRoutes = ["/404"];
+  const noLayoutRoutes = ["/404", "/admin-panel", "/admin-panel/produits", "/admin-panel/contacts", "/admin-panel/actualites"];
   const isNoLayout = noLayoutRoutes.includes(location.pathname);
 
   return (
@@ -31,6 +39,11 @@ function App() {
       {isNoLayout ? (
         <Routes>
           <Route path="/404" element={<NotFoundPage />} />
+          <Route path="/admin-panel" element={<AdminPage />}>
+            <Route path="actualites" element={<ActualitesTab />} />
+            <Route path="produits" element={<ProduitsTab />} />
+            <Route path="contacts" element={<ContactsTab />} />
+          </Route>
         </Routes>
       ) : (
         <Layout>
