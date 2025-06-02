@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes, useLocation, Navigate } from "react-router";
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/layout/Layout";
 
 // Pages dynamiques
 const HomePage = lazy(() => import("./pages/HomePage"));
