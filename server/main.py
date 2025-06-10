@@ -2,7 +2,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from database import init_db
+from app.database import init_db
 from contextlib import asynccontextmanager
 from app.routers import actualites, produits, contacts
 import uvicorn
@@ -25,7 +25,7 @@ app.add_middleware(
   allow_headers=["*"],
 )
 
-app.mount("/app/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
+app.mount("/app/static", StaticFiles(directory=BASE_DIR / "app/static"), name="static")
 
 #Configuration des routers
 app.include_router(actualites.router)

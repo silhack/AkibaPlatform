@@ -1,4 +1,4 @@
 #!/bin/bash
 
 alembic upgrade head
-python app/main.py
+python main.py
