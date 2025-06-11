@@ -12,7 +12,7 @@ router = APIRouter(
 
 #POST - Ajouter un contact à la DB
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=ContactsPublic)
-def route_create_contact(contact: ContactsCreate, db: Session = Depends(get_db), ):
+def route_create_contact(contact: ContactsCreate, db: Session = Depends(get_db)):
   return create_contact(db, contact)
 
 #POST - Envoi de mail à l'aide du formulaire de contact
@@ -27,7 +27,7 @@ def route_get_contacts(db: Session = Depends(get_db), ):
 
 #GET - Récuperer un contact depuis la DB
 @router.get("/{id_contact}", status_code=status.HTTP_200_OK, response_model=ContactsPublic)
-def route_get_contacts(id_contact: uuid.UUID, db: Session = Depends(get_db) ):
+def route_get_contact(id_contact: uuid.UUID, db: Session = Depends(get_db) ):
   return get_contact(db, id_contact)
 
 #PATCH - Modifier un contact de la DB
@@ -42,6 +42,6 @@ def route_delete_contact(id_contact: uuid.UUID, db: Session = Depends(get_db)):
 
 #DELETE - Supprimer tous les contacts de la DB
 @router.delete("/", status_code=status.HTTP_200_OK)
-def route_delete_contact(db: Session = Depends(get_db)):
+def route_delete_contacts(db: Session = Depends(get_db)):
   return delete_all_contacts(db)
 

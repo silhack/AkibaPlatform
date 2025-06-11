@@ -102,7 +102,7 @@ const AboutUs = () => {
             "Nous combinons technologie et accompagnement stratégique pour offrir des solutions adaptées aux PME agroalimentaires"
           }
         />
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid items-center md:grid-cols-2 gap-6">
           {expertiseData.map((item, index) => (
             <motion.div
               key={index}

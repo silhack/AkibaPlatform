@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.database import init_db
 from contextlib import asynccontextmanager
-from app.routers import actualites, produits, contacts
+from app.routers import actualites, produits, contacts, auth
 import uvicorn
 
 @asynccontextmanager
@@ -31,6 +31,7 @@ app.mount("/app/static", StaticFiles(directory=BASE_DIR / "app/static"), name="s
 app.include_router(actualites.router)
 app.include_router(contacts.router)
 app.include_router(produits.router)
+app.include_router(auth.router)
 
 #Points d'entrée
 @app.get("/")
