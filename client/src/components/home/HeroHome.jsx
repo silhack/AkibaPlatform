@@ -20,7 +20,7 @@ const HeroHome = () => {
             Akiba
           </span>{" "}
           <span className="text-white">
-            Solution — Votre allié stratégique dans l’agro
+            Solution — Votre allié stratégique dans l’agroalimentaire
           </span>
         </motion.h1>
 

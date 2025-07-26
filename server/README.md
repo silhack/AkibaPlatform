@@ -56,6 +56,9 @@ Crée un fichier `.env` à la racine du projet et configure les variables néces
 ## Initialiser la base de données
 
 ```bash
+ alembic revision --autogenerate -m "<message>"
+```
+```bash
  alembic upgrade head
 ```
 
