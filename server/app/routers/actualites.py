@@ -1,7 +1,7 @@
 import uuid
 from typing import Optional
 from fastapi import APIRouter, Depends, File, Form, UploadFile, status
-from sqlmodel import Session
+from sqlalchemy.orm import Session
 from app.crud.actualites import (
     create_actualites,
     delete_actualite,
@@ -11,38 +11,44 @@ from app.crud.actualites import (
     delete_all_actualites
 )
 from app.database import get_db
-from app.models.actualites import ActualitesCreate, ActualitesPublic, ActualitesUpdate, Categorie, convert_actualite_to_public
+from app.schemas.actualites import ActualiteCreate, ActualitePublic, ActualiteUpdate, Categorie
+from app.dependencies import get_current_admin
 
+# Router pour la gestion des actualités (articles de blog, nouvelles, etc.)
 router = APIRouter(tags=["actualites"], prefix="/actualites")
 
-
-@router.post("/", response_model=ActualitesPublic, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=ActualitePublic, status_code=status.HTTP_201_CREATED)
 def route_create_actualites(
     titre: str = Form(...),
     description: str = Form(...),
     sources: list[str] = Form([]),
     categorie: Categorie = Form(...),
     image: UploadFile = File(None),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_admin=Depends(get_current_admin)
 ):
-    actualites_data = ActualitesCreate(titre=titre, description=description, sources=sources, categorie=categorie)
-    db_actualite = create_actualites(db, actualites_data, image)
-    return convert_actualite_to_public(db_actualite)
+    """
+    Crée une nouvelle actualité (Accès admin uniquement).
+    Supporte l'upload d'image et une liste de sources.
+    """
+    actualites_data = ActualiteCreate(titre=titre, description=description, sources=sources, categorie=categorie)
+    return create_actualites(db, actualites_data, image)
 
-
-@router.get("/", response_model=list[ActualitesPublic], status_code=status.HTTP_200_OK)
+@router.get("/", response_model=list[ActualitePublic], status_code=status.HTTP_200_OK)
 def route_get_actualites(db: Session = Depends(get_db)):
-    actualites = get_all_actualites(db)
-    return [convert_actualite_to_public(actu) for actu in actualites]
+    """
+    Récupère la liste de toutes les actualités (Accès public).
+    """
+    return get_all_actualites(db)
 
-
-@router.get("/{id_actualites}", response_model=ActualitesPublic, status_code=status.HTTP_200_OK)
+@router.get("/{id_actualites}", response_model=ActualitePublic, status_code=status.HTTP_200_OK)
 def route_get_actualite(id_actualites: uuid.UUID, db: Session = Depends(get_db)):
-    actu = get_actualite(db, id_actualites)
-    return convert_actualite_to_public(actu)
+    """
+    Récupère une actualité spécifique par son ID (Accès public).
+    """
+    return get_actualite(db, id_actualites)
 
-
-@router.patch("/{id_actualites}", response_model=ActualitesPublic, status_code=status.HTTP_200_OK)
+@router.patch("/{id_actualites}", response_model=ActualitePublic, status_code=status.HTTP_200_OK)
 def route_update_actualites(
     id_actualites: uuid.UUID,
     titre: str | None = Form(None),
@@ -50,23 +56,38 @@ def route_update_actualites(
     sources: list[str] | None = Form(None),
     categorie: Categorie | None = Form(None),
     image: Optional[UploadFile] = File(None),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_admin=Depends(get_current_admin)
 ):
-    update_data = ActualitesUpdate(
+    """
+    Met à jour une actualité existante (Accès admin uniquement).
+    Gère la mise à jour partielle des champs et le remplacement d'image.
+    """
+    update_data = ActualiteUpdate(
         titre=titre,
         description=description,
         sources=sources,
         categorie=categorie
     )
-    actu = update_actualites(db, id_actualites, update_data, image)
-    return convert_actualite_to_public(actu)
-
+    return update_actualites(db, id_actualites, update_data, image)
 
 @router.delete("/{id_actualites}", status_code=status.HTTP_200_OK)
-def route_delete_actualite(id_actualites: uuid.UUID, db: Session = Depends(get_db)):
+def route_delete_actualite(
+    id_actualites: uuid.UUID, 
+    db: Session = Depends(get_db),
+    current_admin=Depends(get_current_admin)
+):
+    """
+    Supprime une actualité (Accès admin uniquement).
+    """
     return delete_actualite(db, id_actualites)
 
-
 @router.delete("/", status_code=status.HTTP_200_OK)
-def route_delete_actualites(db: Session = Depends(get_db)):
+def route_delete_actualites(
+    db: Session = Depends(get_db),
+    current_admin=Depends(get_current_admin)
+):
+    """
+    Supprime TOUTES les actualités (Accès admin uniquement).
+    """
     return delete_all_actualites(db)

@@ -1,29 +1,19 @@
-from datetime import datetime, timezone
-from sqlmodel import SQLModel, Field
 import uuid
+from sqlalchemy.orm import Mapped, mapped_column
+from app.database import Base
+from datetime import datetime
+from sqlalchemy import func
 
-# ADMINS MODELES
+class Admin(Base):
+    """
+    Modèle représentant un administrateur du système.
+    """
+    __tablename__ = "admins"
 
-class AdminsBase(SQLModel):
-  nom: str = Field(index=True)
-  password: str 
-  created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-  updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
-class Admins(AdminsBase, table=True):
-  id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-
-class AdminsCreate(AdminsBase):
-  pass
-
-class AdminsPublic(AdminsBase):
-  id: uuid.UUID
-
-class AdminsUpdate(SQLModel):
-  nom: str | None = None
-  password: str | None = None
-  updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
-class LoginRequest(SQLModel):
-  nom: str
-  password: str
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    nom: Mapped[str] = mapped_column(unique=True, index=True)
+    email: Mapped[str] = mapped_column(unique=True, index=True) # Ajout de l'email
+    password: Mapped[str] = mapped_column()
+    
+    created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now())

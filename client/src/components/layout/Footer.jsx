@@ -1,92 +1,85 @@
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa6";
-import { FiInstagram } from "react-icons/fi";
-import { infoContacts } from "../../data/config";
-import { Link } from "react-router";
-
-const usefulLinks = [
-  { label: "Accueil", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Solutions", href: "/solution" },
-  { label: "Produits", href: "/produits" },
-  { label: "Actualités", href: "/actualites" },
-  { label: "À propos", href: "/a-propos" },
-  { label: "Contact", href: "/contacts" },
-];
-
-const legalLinks = [
-  { label: "Mentions légales", href: "/" },
-  { label: "Politiques de confidentialité", href: "/" },
-];
+import { MessageCircle } from 'lucide-react';
+import { FaLinkedinIn } from 'react-icons/fa6';
+import { Link } from 'react-router';
 
 const Footer = () => {
   return (
-    <footer className="bg-normal-blue text-white py-10 px-6 md:px-12 lg:px-16 w-full mt-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Logo + Réseaux sociaux */}
-        <div className="flex flex-col items-start space-y-4">
-          <div className="bg-[#fcdcdc] text-[#1e1e1e] px-4 py-1 font-bold rounded-md">
-            LOGO
-          </div>
-          <h2 className="text-lg font-bold">AKIBA SOLUTION</h2>
-          <div className="flex space-x-4 text-xl">
-            <FiInstagram
-              title="Instagram"
-              aria-label="Instagram"
-              className="hover:text-gray-300 transition cursor-pointer"
-            />
-            <Link to={infoContacts.linkedIn} target="_blank">
-              <FaLinkedinIn
-                title="LinkedIn"
-                aria-label="LinkedIn"
-                className="hover:text-gray-300 transition cursor-pointer"
-              />
-            </Link>
-
-            <FaFacebookF
-              title="Facebook"
-              aria-label="Facebook"
-              className="hover:text-gray-300 transition cursor-pointer"
-            />
+    <footer>
+      <div className="container footer-inner">
+        <div className="footer-brand">
+          <Link to="/" className="logo">
+            <img src="/assets/logo_coreline.png" alt="Logo Coreline" className="logo-img" />
+            ORE<span>LINE</span>
+          </Link>
+          <p>
+            Alliance internationale pour l'investissement durable et la structuration de projets
+            d'impact.
+          </p>
+          <div className="social-links">
+            <a href="#" className="social-link" aria-label="LinkedIn">
+              <FaLinkedinIn size={20} />
+            </a>
+            <a href="#" className="social-link" aria-label="WhatsApp">
+              <MessageCircle size={20} />
+            </a>
           </div>
         </div>
 
-        {/* Liens utiles */}
-        <div>
-          <h3 className="text-lg font-bold mb-4">Liens Utiles</h3>
-          <ul className="space-y-2 grid grid-cols-2">
-            {usefulLinks.map((link, index) => (
-              <li key={index}>
-                <a
-                  href={link.href}
-                  className="hover:text-gray-300 cursor-pointer"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+        <div className="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li>
+              <a href="#accueil">Accueil</a>
+            </li>
+            <li>
+              <a href="#mission">Mission</a>
+            </li>
+            <li>
+              <a href="#produits">Piliers</a>
+            </li>
+            <li>
+              <a href="#solutions">Portfolio</a>
+            </li>
+            <li>
+              <a href="#actualites">Actualités</a>
+            </li>
           </ul>
         </div>
-        <div>
-          <h3 className="text-lg font-bold mb-4">Contactez-nous</h3>
-          <p>{infoContacts.adresse}</p>
-          <p>{`${infoContacts.phone_civ} / ${infoContacts.phone_fr}`}</p>
-          <p>{infoContacts.email}</p>
+
+        <div className="footer-col">
+          <h4>Expertises</h4>
+          <ul>
+            <li>
+              <a href="#produits">Origine (Ingénierie)</a>
+            </li>
+            <li>
+              <a href="#produits">Invest (Financement)</a>
+            </li>
+            <li>
+              <a href="#produits">Elite (Conseil)</a>
+            </li>
+            <li>
+              <a href="#contact">Contact Business</a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li>🇫🇷 Paris: +33 7 53 34 25 98</li>
+            <li>🇨🇮 Abidjan: +225 07 58 42 26 65</li>
+          </ul>
         </div>
       </div>
 
-      {/* Ligne de séparation */}
-      <div className="border-t border-gray-400 mt-6 pt-4 text-sm flex flex-col md:flex-row justify-between">
-        <p>Copyright ©2025 Akiba Solution. Tous droits réservés</p>
-        <div className="flex space-x-6">
-          {legalLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              className="hover:text-gray-300 cursor-pointer"
-            >
-              {link.label}
-            </a>
-          ))}
+      <div className="footer-bottom">
+        <div className="container">
+          <p>© 2026 Coreline Alliance. Tous droits réservés.</p>
+          <div className="footer-legal">
+            <a href="#">Mentions légales</a>
+            <a href="#">Politique de confidentialité</a>
+          </div>
         </div>
       </div>
     </footer>

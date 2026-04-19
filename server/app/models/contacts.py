@@ -1,31 +1,17 @@
-from datetime import datetime, timezone
-from sqlmodel import SQLModel, Field
+from datetime import datetime
 import uuid
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, DateTime, text
+from app.database import Base
 
-# CONTACTS MODELES
+class Contact(Base):
+    __tablename__ = "contacts"
 
-class ContactsBase(SQLModel):
-  nom: str
-  email: str = Field(index=True)
-  telephone: str = Field(index=True)
-  objet: str
-  message: str
-  created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-  updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
-class Contacts(ContactsBase, table=True):
-  id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-
-class ContactsCreate(ContactsBase):
-  pass
-
-class ContactsPublic(ContactsBase):
-  id: uuid.UUID
-
-class ContactsUpdate(SQLModel):
-  nom: str | None = None
-  email: str | None = None
-  telephone: str | None = None
-  updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-  objet: str | None = None
-  message: str | None = None
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    nom: Mapped[str] = mapped_column(String)
+    email: Mapped[str] = mapped_column(String, index=True)
+    telephone: Mapped[str] = mapped_column(String, index=True)
+    objet: Mapped[str] = mapped_column(String)
+    message: Mapped[str] = mapped_column(String)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=text("TIMEZONE('utc', CURRENT_TIMESTAMP)"))
+    updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), onupdate=text("TIMEZONE('utc', CURRENT_TIMESTAMP)"))

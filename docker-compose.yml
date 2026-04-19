@@ -1,53 +1,10 @@
 version: '3'
 services:
-
-  postgres:
-    image: "postgres:latest"
-    # hostname: 127.0.0.1
-    container_name: postgresdb
-    volumes:
-      - /var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_DB=akiba_db
-      - POSTGRES_USER=postgres
-      - PGUSER=postgres
-      - POSTGRES_PASSWORD=1234
-    
-    healthcheck:
-        test: ["CMD-SHELL", "pg_isready -U postgres"]
-        interval: 10s
-        timeout: 5s
-        retries: 5
-    # networks:
-    #   - akiba-network
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-    depends_on:
-      - postgres
-
-  akiba-front:
+  coreline-front:
     build: ./client
     container_name: client
     ports:
-      - "5173:5173"
-    # networks:
-    #   - akiba-network
-
-  akiba-back:
-    build: ./server
-    container_name: server
-    ports:
-      - "8000:8000"
-    # command: uvicorn app.main:app --reload
-    depends_on:
-      - postgres
-    # networks:
-    #   - akiba-network
+      - '80:80'
 
 # networks:
 #   akiba-network:

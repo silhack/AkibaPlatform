@@ -36,15 +36,16 @@ const LoginPage = () => {
 
     try {
       setLoading(true);
+      // Appel à l'API de connexion
       const response = await axiosClient.post("/admins/login", {
         nom: formData.nom,
         password: formData.password,
       });
 
-      // Exemple de réponse attendue : { token: "admin-token", nom: "...", admin_id: "..." }
-      const { token } = response.data;
+      // La nouvelle API retourne { access_token: "...", token_type: "bearer" }
+      const { access_token } = response.data;
 
-      login(token); // stocke le token dans le contexte
+      login(access_token); // Stocke le token JWT dans le contexte et le localStorage
       navigate("/admin-panel");
     } catch (err) {
       if (err.response && err.response.status === 401) {

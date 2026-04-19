@@ -1,59 +1,45 @@
-from datetime import datetime, timezone
-from sqlmodel import SQLModel, Field, Relationship
-import enum
+from datetime import datetime
 import uuid
-from typing import Optional, List
+import enum
+from typing import List
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, DateTime, text, ForeignKey, Table, Column, Enum
+from app.database import Base
 
 class Categorie(str, enum.Enum):
     ANALYSES_TENDANCES = "Analyses & tendances"
     EVENEMENTS = "Évènements"
     ETUDES = "Études"
 
+# Association table for Many-to-Many relationship between Actualites and Source
+actualite_source_link = Table(
+    "actualite_source_link",
+    Base.metadata,
+    Column("actualite_id", ForeignKey("actualites.id"), primary_key=True),
+    Column("source_id", ForeignKey("sources.id"), primary_key=True),
+)
 
-class ActualiteSourceLink(SQLModel, table=True):
-    actualite_id: uuid.UUID = Field(foreign_key="actualites.id", primary_key=True)
-    source_id: int = Field(foreign_key="source.id", primary_key=True)
+class Source(Base):
+    __tablename__ = "sources"
 
-class Source(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    nom: str = Field(index=True, unique=True)
-    actualites: List["Actualites"] = Relationship(back_populates="sources", link_model=ActualiteSourceLink)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    nom: Mapped[str] = mapped_column(String, index=True, unique=True)
+    
+    actualites: Mapped[List["Actualite"]] = relationship(
+        secondary=actualite_source_link, back_populates="sources"
+    )
 
-class ActualitesBase(SQLModel):
-    image: str | None = None
-    titre: str = Field(index=True)
-    description: str
-    categorie: Categorie
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+class Actualite(Base):
+    __tablename__ = "actualites"
 
-class Actualites(ActualitesBase, table=True):
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-    sources: List[Source] = Relationship(back_populates="actualites", link_model=ActualiteSourceLink)
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    image: Mapped[str | None] = mapped_column(String, nullable=True)
+    titre: Mapped[str] = mapped_column(String, index=True)
+    description: Mapped[str] = mapped_column(String)
+    categorie: Mapped[Categorie] = mapped_column(Enum(Categorie))
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=text("TIMEZONE('utc', CURRENT_TIMESTAMP)"))
+    updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), onupdate=text("TIMEZONE('utc', CURRENT_TIMESTAMP)"))
 
-class ActualitesCreate(ActualitesBase):
-    sources: List[str]
-
-class ActualitesPublic(ActualitesBase):
-    id: uuid.UUID
-    sources: List[str]
-
-class ActualitesUpdate(SQLModel):
-    image: str | None = None
-    titre: str | None = None
-    description: str | None = None
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    categorie: Categorie | None = None
-    sources: List[str] | None = None
-
-def convert_actualite_to_public(actu: Actualites) -> ActualitesPublic:
-    return ActualitesPublic(
-        id=actu.id,
-        image=actu.image,
-        titre=actu.titre,
-        created_at= actu.created_at,
-        updated_at= actu.updated_at,
-        description=actu.description,
-        categorie=actu.categorie,
-        sources=[source.nom for source in actu.sources]
+    sources: Mapped[List[Source]] = relationship(
+        secondary=actualite_source_link, back_populates="actualites"
     )

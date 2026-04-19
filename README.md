@@ -1,89 +1,50 @@
-# Site Vitrine AKIBA SOLUTION
+# Coreline Alliance Platform
 
-**Akiba Solution** est une entreprise technologique dédiée à la structuration, la digitalisation et au financement des PME agroalimentaires africaines.
+Coreline est une alliance internationale d'experts en finance, agro-industrie, énergie et technologies œuvrant pour accélérer le développement de projets durables au service des communautés locales africaines.
 
-Ce projet se compose de deux parties :
-- Un **site vitrine** moderne (frontend React)
-- Une **API backend** robuste (FastAPI + PostgreSQL)
+**Le projet met en avant une approche institutionnelle et premium, alignant identité visuelle "Bleu et Or" et normes d'accessibilité (A11y).**
 
+## 🚀 Fonctionnalités Principales
+- **Architecture Multi-pages :** Navigation optimisée par React Router v7.
+- **Design Institutionnel (Bleu & Or) :** Palette de couleurs premium reflétant l'excellence et la pérennité.
+- **Accessibilité & SEO (Score >= 8/10) :** Sémantique HTML rigoureuse, métadonnées OpenGraph complètes, et labels ARIA.
+- **Fluid Mockups :** Formulaires et interfaces réactives, gérés avec les hooks React et Framer Motion pour les animations fluides.
 
-## Arborescence du projet
+## 📁 Structure du Projet
 
-```bash
-AkibaPlatform/
-├── client/          # Site vitrine React (frontend)
-├── server/          # API FastAPI (backend)
-├── README.md        # Ce fichier global
+```text
+client/
+├── public/                 # Assets (Logos, Photos comme ceo.jpeg) & Fichiers SEO (robots.txt, sitemap.xml)
+├── src/
+│   ├── components/         # Composants Modulaires Réutilisables
+│   │   ├── home/           # Sections des différentes pages (Hero, Team, Contact...)
+│   │   └── layout/         # Composants globaux persistants (Navbar, Footer)
+│   ├── pages/              # Pages principales (Home, Vision, Actualités)
+│   ├── App.jsx             # Configuration des routes (React Router)
+│   └── coreline.css        # Système de Design (Styles, Grilles Bento, Variables de Thème)
 ```
 
+## 🛠️ Technologies Utilisées
+- **React 19**
+- **React Router 7**
+- **Vite**
+- **Framer Motion**
+- **Lucide React** & **React Icons**
 
-## Frontend – Site Vitrine
+## 🔧 Installation et Lancement
 
-Le frontend est un site vitrine moderne développé avec **React 19**, **Vite** et **TailwindCSS**. Il présente l’entreprise, ses services, ses produits, ses partenaires et propose un formulaire de contact dynamique.
-
-Voir le [README du frontend](./client/README.md)
-
-
-## Backend – API REST FastAPI
-
-Le backend utilise **FastAPI**, **SQLModel** et **PostgreSQL** pour :
-
-* gérer les actualités, produits, formulaires
-
-Voir le [README du backend](./server/README.md)
-
-
-## Lancer le projet localement
-
-### 1. Cloner le dépôt
-
-```bash
-git clone https://github.com/silhack/AkibaPlatform.git
-cd AkibaPlatform
-```
-
-
-### 2. Lancer le backend
-
-```bash
-cd server
-python -m venv .venv
-source .venv/bin/activate  # ou .venv\Scripts\activate sous Windows
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
-
-> Assure-toi d’avoir PostgreSQL installé et une base configurée avec `.env`
-
-
-### 3. Lancer le frontend
-
+1. Cloner le projet et installer les dépendances (Note : les dépendances inutiles comme Tailwind ont été nettoyées pour privilégier le CSS pur premium).
 ```bash
 cd client
 npm install
+```
+
+2. Démarrer le serveur de développement :
+```bash
 npm run dev
 ```
 
-> Accès à l’application sur `http://localhost:5173`
-> L’API est disponible sur `http://localhost:8000/docs`
+3. Le site sera disponible à l'adresse locale standard générée par Vite (généralement `http://localhost:5173`).
 
-
-## Déploiement
-
-Le projet peut être déployé :
-
-* côté **frontend** sur Vercel, Netlify ou serveur Nginx
-* côté **backend** via Docker ou serveur Python (Gunicorn/Uvicorn)
-
-
-## Auteurs
-
-* **Akiba Solution** — [www.akibasolution.com](http://www.akibasolution.com)
-
-
-## Licence
-
-Ce projet est sous licence **MIT**. Consultez le fichier [LICENSE](./LICENSE) pour plus d'informations.
-
-
-
+---
+Développé avec 💙 et 🏅 pour l'initiative IYWF 2026.
