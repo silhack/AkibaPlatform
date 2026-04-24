@@ -29,46 +29,46 @@ const Footer = () => {
           <h4>Navigation</h4>
           <ul>
             <li>
-              <a href="#accueil">Accueil</a>
+              <Link to="/">Accueil</Link>
             </li>
             <li>
-              <a href="#mission">Mission</a>
+              <Link to="/about">À Propos</Link>
             </li>
             <li>
-              <a href="#produits">Piliers</a>
+              <Link to="/services">Services</Link>
             </li>
             <li>
-              <a href="#solutions">Portfolio</a>
+              <Link to="/solutions">Portfolio</Link>
             </li>
             <li>
-              <a href="#actualites">Actualités</a>
+              <Link to="/actualites">Actualités</Link>
             </li>
           </ul>
         </div>
 
         <div className="footer-col">
-          <h4>Expertises</h4>
+          <h4>Nos Pages</h4>
           <ul>
             <li>
-              <a href="#produits">Origine (Ingénierie)</a>
+              <Link to="/about">Notre ADN</Link>
             </li>
             <li>
-              <a href="#produits">Invest (Financement)</a>
+              <Link to="/solutions">Nos Réalisations</Link>
             </li>
             <li>
-              <a href="#produits">Elite (Conseil)</a>
+              <Link to="/services">Piliers d'action</Link>
             </li>
             <li>
-              <a href="#contact">Contact Business</a>
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </div>
 
         <div className="footer-col">
-          <h4>Contact</h4>
+          <h4>Téléphone</h4>
           <ul>
-            <li>🇫🇷 Paris: +33 7 53 34 25 98</li>
-            <li>🇨🇮 Abidjan: +225 07 58 42 26 65</li>
+            <li>+33 7 53 34 25 98</li>
+            <li>+225 07 58 42 26 65</li>
           </ul>
         </div>
       </div>

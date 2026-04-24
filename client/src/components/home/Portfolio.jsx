@@ -1,28 +1,32 @@
 import { motion } from 'framer-motion';
-import { Leaf, Tractor, Zap } from 'lucide-react';
+import { Target, Box, Sprout } from 'lucide-react';
+import { Link } from 'react-router';
 
 const Portfolio = () => {
   const projects = [
     {
-      icon: <Leaf />,
-      title: 'Projet Yellior',
+      icon: <Target />,
+      title: 'Projet NEPER',
       description:
-        "Transformation du maïs en farine premium. Un modèle d'industrialisation verticale pour renforcer la souveraineté alimentaire régionale.",
+        "Accompagnement à la mise en place de 3 unités de transformation agroalimentaire durables pour Neper Ventures (Manioc & Karité).",
       featured: true,
+      id: 'neper'
     },
     {
-      icon: <Tractor />,
-      title: 'Projet Makoré',
+      icon: <Sprout />,
+      title: 'Projet YELLIOR',
       description:
-        "Accompagnement d'une coopérative de 500+ femmes vers la certification bio et l'exportation directe vers les marchés européens.",
+        "Stratégie de commercialisation et de financement pour la transformation locale du manioc et banane en farines premium à haute valeur ajoutée.",
       featured: false,
+      id: 'yellior'
     },
     {
-      icon: <Zap />,
-      title: 'Projet Edissou',
+      icon: <Box />,
+      title: 'Projet Cassava (Edissou)',
       description:
-        "Développement d'infrastructures solaires pour l'irrigation autonome, améliorant les rendements agricoles tout en réduisant l'empreinte carbone.",
+        "Projet d'inclusion financière et numérique pour 100 femmes de la coopérative de Lolobo, soutenu par la Fondation Crédit Coopératif.",
       featured: false,
+      id: 'cassava'
     },
   ];
 
@@ -31,8 +35,8 @@ const Portfolio = () => {
       <div className="container">
         <div className="section-header">
           <span className="badge">Portfolio</span>
-          <h2>Projets & Investissements</h2>
-          <p>Des réalisations concrètes au service du développement durable.</p>
+          <h2>Nos missions réalisées</h2>
+          <p>Aperçu de nos réalisations concrètes sur le terrain depuis 2024.</p>
         </div>
 
         <div className="services-grid">
@@ -48,11 +52,14 @@ const Portfolio = () => {
               <div className="service-icon">{project.icon}</div>
               <h3>{project.title}</h3>
               <p>{project.description}</p>
-              <a href="#contact" className="service-link">
-                Détails du projet →
-              </a>
             </motion.div>
           ))}
+        </div>
+        
+        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+          <Link to="/solutions" className="btn btn-primary">
+            Découvrir tous nos projets
+          </Link>
         </div>
       </div>
     </section>

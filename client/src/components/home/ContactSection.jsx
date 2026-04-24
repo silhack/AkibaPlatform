@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { useState } from 'react';
 
 const ContactSection = () => {
@@ -40,7 +40,7 @@ const ContactSection = () => {
                 <MapPin />
               </div>
               <div className="info-text">
-                <strong>🇫🇷 Siège Paris</strong>
+                <strong>Siège Paris</strong>
                 <span>45b Boulevard Jourdan, Paris, 75014</span>
                 <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>Tél: + (33) 7 53 34 25 98</span>
               </div>
@@ -51,21 +51,11 @@ const ContactSection = () => {
                 <MapPin />
               </div>
               <div className="info-text">
-                <strong>🇨🇮 Bureau Abidjan</strong>
+                <strong>Bureau Abidjan</strong>
                 <span>Cocody, Angré 7ème Tranche</span>
                 <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>
                   Tél: + (225) 07 58 42 26 65
                 </span>
-              </div>
-            </div>
-
-            <div className="contact-info-item">
-              <div className="info-icon-box">
-                <Mail />
-              </div>
-              <div className="info-text">
-                <strong>Email</strong>
-                <span>[EMAIL_ADDRESS]</span>
               </div>
             </div>
           </div>

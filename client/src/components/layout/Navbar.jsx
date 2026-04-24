@@ -45,9 +45,9 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Accueil', path: '/', hash: '' },
-    { name: 'Mission', path: '/', hash: '#mission' },
-    { name: 'Portfolio', path: '/', hash: '#solutions' },
-    { name: 'Vision & Équipe', path: '/vision', hash: '' },
+    { name: 'À Propos', path: '/about', hash: '' },
+    { name: 'Services', path: '/services', hash: '' },
+    { name: 'Portfolio', path: '/solutions', hash: '' },
     { name: 'Actualités', path: '/actualites', hash: '' },
   ];
 
@@ -85,16 +85,13 @@ const Navbar = () => {
             );
           })}
           <li>
-            <a 
-              href="#!" 
+            <Link 
+              to="/contact"
               className="btn-contact" 
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick('/', '#contact');
-              }}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Nous Contacter
-            </a>
+            </Link>
           </li>
         </ul>
 

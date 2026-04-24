@@ -123,14 +123,14 @@ header.scrolled {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--primary);
+  background: var(--accent);
   transition: var(--transition);
   border-radius: 2px;
 }
 
 .nav-links a:hover,
 .nav-links a.active-link {
-  color: var(--primary);
+  color: var(--accent);
 }
 
 .nav-links a:hover::after,
@@ -241,9 +241,9 @@ header.scrolled {
   display: inline-block;
   padding: 0.45rem 1rem;
   background: rgba(212, 175, 55, 0.15);
-  color: var(--primary);
+  color: #b59223; /* A slightly darker gold for better readability on white backgrounds */
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 800;
   border-radius: 99px;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
@@ -1057,7 +1057,8 @@ footer {
 }
 
 .footer-col ul a:hover {
-  color: var(--primary);
+  color: var(--accent);
+  transform: translateX(5px);
 }
 
 .footer-bottom {
