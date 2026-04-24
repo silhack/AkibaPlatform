@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 :root {
-  --primary: #00274d; /* Deep Institutional Navy */
-  --primary-dark: #001a33;
+  --primary: #0052cc; /* Bright Institutional Blue */
+  --primary-dark: #003d99;
   --accent: #d4af37; /* Premium Gold */
   --accent-light: #fef9c3; /* Light gold background */
   --gold: #d4af37; /* Success/Gold highlights */
-  --secondary: #001226; /* Deepest Navy */
+  --secondary: #1a5a99; /* Luminous Navy */
   --white: #ffffff;
   --gray-50: #f4f7fa; /* Blue tinted white */
   --gray-100: #e6edf4; /* Light Blue-Gray */
@@ -337,13 +337,14 @@ header.scrolled {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 900;
-  color: var(--primary);
+  color: var(--accent);
   line-height: 1;
+  text-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
 }
 
 .stat-label {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
   text-align: center;
 }
