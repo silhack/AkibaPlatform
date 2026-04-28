@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { AreaChart, Compass, Lightbulb, Link as LinkIcon, Settings } from 'lucide-react';
 import { useEffect } from 'react';
-import BentoServices from '../components/home/BentoServices';
 import { Link } from 'react-router';
+import SEO from '../components/common/SEO';
+import BentoServices from '../components/home/BentoServices';
 
 const ServicePage = () => {
   useEffect(() => {
@@ -11,6 +12,10 @@ const ServicePage = () => {
 
   return (
     <main className="service-page" style={{ paddingTop: '100px' }}>
+      <SEO
+        title="Services"
+        description="Explorez les piliers d'action de Coreline Alliance : audit stratégique, structuration financière, implémentation opérationnelle et mesure d'impact."
+      />
       {/* Header Section */}
       <section className="section">
         <div className="container">

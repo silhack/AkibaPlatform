@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Target, Box, Sprout } from 'lucide-react';
+import { Box, Sprout, Target } from 'lucide-react';
 import { Link } from 'react-router';
 
 const Portfolio = () => {
@@ -8,17 +8,17 @@ const Portfolio = () => {
       icon: <Target />,
       title: 'Projet NEPER',
       description:
-        "Accompagnement à la mise en place de 3 unités de transformation agroalimentaire durables pour Neper Ventures (Manioc & Karité).",
+        'Accompagnement à la mise en place de 3 unités de transformation agroalimentaire durables pour Neper Ventures (Manioc & Karité).',
       featured: true,
-      id: 'neper'
+      id: 'neper',
     },
     {
       icon: <Sprout />,
       title: 'Projet YELLIOR',
       description:
-        "Stratégie de commercialisation et de financement pour la transformation locale du manioc et banane en farines premium à haute valeur ajoutée.",
+        'Stratégie de commercialisation et de financement pour la transformation locale du manioc et banane en farines premium à haute valeur ajoutée.',
       featured: false,
-      id: 'yellior'
+      id: 'yellior',
     },
     {
       icon: <Box />,
@@ -26,7 +26,7 @@ const Portfolio = () => {
       description:
         "Projet d'inclusion financière et numérique pour 100 femmes de la coopérative de Lolobo, soutenu par la Fondation Crédit Coopératif.",
       featured: false,
-      id: 'cassava'
+      id: 'cassava',
     },
   ];
 
@@ -55,7 +55,7 @@ const Portfolio = () => {
             </motion.div>
           ))}
         </div>
-        
+
         <div style={{ textAlign: 'center', marginTop: '3rem' }}>
           <Link to="/solutions" className="btn btn-primary">
             Découvrir tous nos projets

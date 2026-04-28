@@ -228,7 +228,7 @@ header.scrolled {
   background: url('/assets/hero_bg.png') no-repeat center center;
   background-size: cover;
   z-index: -1;
-  filter: saturate(1) brightness(1.2);
+  filter: saturate(1) brightness(0.9); /* Slightly darker for better text contrast */
   -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
   mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
 }
@@ -676,15 +676,7 @@ header.scrolled {
 }
 
 /* Decorative colored placeholders */
-.news-img-1 {
-  background: linear-gradient(135deg, #fef9c3, #d4af37);
-}
-.news-img-2 {
-  background: linear-gradient(135deg, #fef08a, #ca8a04);
-}
-.news-img-3 {
-  background: linear-gradient(135deg, var(--gray-200), var(--primary));
-}
+/* Real images are now used in NewsSection.jsx */
 
 .news-content {
   padding: 1.75rem;

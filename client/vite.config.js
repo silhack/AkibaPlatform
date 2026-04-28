@@ -4,8 +4,19 @@ import { defineConfig } from 'vite';
 // https://vite.dev/config/
 export default defineConfig({
   server: {
-    host: '0.0.0.0', // Permet l'accès depuis n'importe quel appareil sur le réseau
-    port: 5173, // Le port utilisé par défaut par Vite
+    host: '0.0.0.0',
+    port: 5173,
   },
   plugins: [react()],
+  esbuild: {
+    drop: ['console', 'debugger'],
+  },
+  build: {
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
 });

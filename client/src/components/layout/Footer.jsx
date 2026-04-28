@@ -4,28 +4,40 @@ import { Link } from 'react-router';
 
 const Footer = () => {
   return (
-    <footer>
+    <footer aria-label="Pied de page">
       <div className="container footer-inner">
         <div className="footer-brand">
-          <Link to="/" className="logo">
-            <img src="/assets/logo_coreline.png" alt="Logo Coreline" className="logo-img" />
+          <Link to="/" className="logo" aria-label="Coreline Alliance - Accueil">
+            <img src="/assets/logo_coreline.png" alt="" role="presentation" className="logo-img" />
             ORE<span>LINE</span>
           </Link>
           <p>
             Alliance internationale pour l'investissement durable et la structuration de projets
             d'impact.
           </p>
-          <div className="social-links">
-            <a href="#" className="social-link" aria-label="LinkedIn">
+          <nav className="social-links" aria-label="Réseaux sociaux">
+            <a
+              href="https://linkedin.com/company/coreline-alliance"
+              className="social-link"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaLinkedinIn size={20} />
             </a>
-            <a href="#" className="social-link" aria-label="WhatsApp">
+            <a
+              href="https://wa.me/33753342598"
+              className="social-link"
+              aria-label="WhatsApp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <MessageCircle size={20} />
             </a>
-          </div>
+          </nav>
         </div>
 
-        <div className="footer-col">
+        <nav className="footer-col" aria-label="Navigation secondaire">
           <h4>Navigation</h4>
           <ul>
             <li>
@@ -44,9 +56,9 @@ const Footer = () => {
               <Link to="/actualites">Actualités</Link>
             </li>
           </ul>
-        </div>
+        </nav>
 
-        <div className="footer-col">
+        <nav className="footer-col" aria-label="Liens rapides">
           <h4>Nos Pages</h4>
           <ul>
             <li>
@@ -62,13 +74,21 @@ const Footer = () => {
               <Link to="/contact">Contact</Link>
             </li>
           </ul>
-        </div>
+        </nav>
 
         <div className="footer-col">
-          <h4>Téléphone</h4>
+          <h4>Contact</h4>
           <ul>
-            <li>+33 7 53 34 25 98</li>
-            <li>+225 07 58 42 26 65</li>
+            <li>
+              <a href="tel:+33753342598" aria-label="Appeler le +33 7 53 34 25 98">
+                +33 7 53 34 25 98
+              </a>
+            </li>
+            <li>
+              <a href="tel:+2250758422665" aria-label="Appeler le +225 07 58 42 26 65">
+                +225 07 58 42 26 65
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -76,10 +96,10 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="container">
           <p>© 2026 Coreline Alliance. Tous droits réservés.</p>
-          <div className="footer-legal">
-            <a href="#">Mentions légales</a>
-            <a href="#">Politique de confidentialité</a>
-          </div>
+          <nav className="footer-legal" aria-label="Liens légaux">
+            <a href="/mentions-legales">Mentions légales</a>
+            <a href="/politique-confidentialite">Politique de confidentialité</a>
+          </nav>
         </div>
       </div>
     </footer>

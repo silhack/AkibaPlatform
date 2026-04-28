@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
+import SEO from '../components/common/SEO';
 
 const NewsPage = () => {
   useEffect(() => {
@@ -8,7 +9,8 @@ const NewsPage = () => {
 
   const news = [
     {
-      imgClass: 'news-img-1',
+      imgUrl:
+        'https://images.unsplash.com/photo-1595665593673-bf1ad72905c0?auto=format&fit=crop&w=800&q=80',
       category: 'Événement',
       title: "Participation à l'IYWF 2026 : Le Plan d'Action",
       description:
@@ -16,7 +18,8 @@ const NewsPage = () => {
       date: '15 Avril 2026',
     },
     {
-      imgClass: 'news-img-2',
+      imgUrl:
+        'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80',
       category: 'Marché',
       title: 'Impact de la transformation locale sur le PIB régional',
       description:
@@ -24,7 +27,8 @@ const NewsPage = () => {
       date: '10 Avril 2026',
     },
     {
-      imgClass: 'news-img-3',
+      imgUrl:
+        'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80',
       category: 'Alliance',
       title: 'Nouveau partenariat stratégique à Paris',
       description:
@@ -32,21 +36,24 @@ const NewsPage = () => {
       date: '02 Avril 2026',
     },
     {
-      imgClass: 'news-img-1',
+      imgUrl:
+        'https://images.unsplash.com/photo-1623943886230-0104690464c6?auto=format&fit=crop&w=800&q=80',
       category: 'Marché',
       title: "La Côte d'Ivoire consolide sa position mondiale",
       description: 'Analyse des opportunités record dans la filière cajou cette année.',
       date: '12 Juin 2025',
     },
     {
-      imgClass: 'news-img-2',
+      imgUrl:
+        'https://images.unsplash.com/photo-1595665593673-bf1ad72905c0?auto=format&fit=crop&w=800&q=80',
       category: 'Certification',
       title: 'Nouvelles normes GlobalGap 2025',
       description: 'Coreline Alliance vous accompagne dans la mise en conformité réglementaire.',
       date: '4 Juin 2025',
     },
     {
-      imgClass: 'news-img-3',
+      imgUrl:
+        'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=800&q=80',
       category: 'Événement',
       title: 'Coreline au SIA de Paris',
       description: "Retrouvez nos experts au Salon International de l'Agriculture.",
@@ -55,7 +62,11 @@ const NewsPage = () => {
   ];
 
   return (
-    <main style={{ paddingTop: '100px. ', background: 'var(--gray-50)', minHeight: '100vh' }}>
+    <main style={{ paddingTop: '100px', background: 'var(--gray-50)', minHeight: '100vh' }}>
+      <SEO
+        title="Actualités"
+        description="Suivez les dernières actualités de Coreline Alliance : interventions stratégiques, analyses de marché et nouveaux partenariats."
+      />
       <section className="section">
         <div className="container">
           <motion.div
@@ -88,17 +99,24 @@ const NewsPage = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <div
-                  className={`news-img-placeholder ${item.imgClass}`}
-                  style={{ height: '200px' }}
-                ></div>
+                <div className="news-img-container" style={{ height: '200px', overflow: 'hidden' }}>
+                  <img
+                    src={item.imgUrl}
+                    alt={item.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </div>
                 <div className="news-content">
                   <span className="news-category">{item.category}</span>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                   <div className="news-meta">
                     <span className="news-date">{item.date}</span>
-                    <a href="#" className="news-link">
+                    <a
+                      href="#"
+                      className="news-link"
+                      aria-label={`Lire la suite de l'article : ${item.title}`}
+                    >
                       Lire la suite →
                     </a>
                   </div>

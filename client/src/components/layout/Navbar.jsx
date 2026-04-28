@@ -54,52 +54,58 @@ const Navbar = () => {
   return (
     <header className={isScrolled ? 'scrolled' : ''} id="main-header">
       <div className="container nav">
-        <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="logo">
-          <img src="/assets/logo_coreline.png" alt="Logo Coreline" className="logo-img" />
+        <Link
+          to="/"
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="logo"
+          aria-label="Coreline Alliance - Accueil"
+        >
+          <img src="/assets/logo_coreline.png" alt="" role="presentation" className="logo-img" />
           ORE<span>LINE</span>
         </Link>
 
-        <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`} id="nav-links">
-          {navLinks.map(link => {
-            const isActive = 
-              location.pathname === link.path && 
-              (
-                (link.hash && location.hash === link.hash) || 
-                (!link.hash && (!location.hash || location.hash === '#accueil'))
+        <nav aria-label="Navigation principale">
+          <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`} id="nav-links">
+            {navLinks.map(link => {
+              const isActive =
+                location.pathname === link.path &&
+                ((link.hash && location.hash === link.hash) ||
+                  (!link.hash && (!location.hash || location.hash === '#accueil')));
+
+              return (
+                <li key={link.name}>
+                  <a
+                    href={link.path + (link.hash || '')}
+                    onClick={e => {
+                      e.preventDefault();
+                      handleNavClick(link.path, link.hash);
+                    }}
+                    className={isActive ? 'active-link' : ''}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {link.name}
+                  </a>
+                </li>
               );
-            
-            return (
-              <li key={link.name}>
-                <a 
-                  href="#!"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(link.path, link.hash);
-                  }}
-                  className={isActive ? 'active-link' : ''}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {link.name}
-                </a>
-              </li>
-            );
-          })}
-          <li>
-            <Link 
-              to="/contact"
-              className="btn-contact" 
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Nous Contacter
-            </Link>
-          </li>
-        </ul>
+            })}
+            <li>
+              <Link
+                to="/contact"
+                className="btn-contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Nous Contacter
+              </Link>
+            </li>
+          </ul>
+        </nav>
 
         <button
           className={`nav-toggle ${isMobileMenuOpen ? 'active' : ''}`}
           id="nav-toggle"
-          aria-label="Menu principal"
+          aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={isMobileMenuOpen}
+          aria-controls="nav-links"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <span></span>
