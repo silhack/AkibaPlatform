@@ -58,19 +58,34 @@ const ContactPage = () => {
       return;
     }
 
-    // Simulate API call
+    // Utilise l'ID de l'environnement ou le placeholder pour le développement
+    const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID || 'VOTRE_ID_FORMSPREE';
+    const FORMSPREE_URL = `https://formspree.io/f/${FORMSPREE_ID}`;
+
     try {
-      // await api.post('/contacts', data);
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setFormStatus({
-        type: 'success',
-        message: 'Votre message a été envoyé avec succès ! Notre équipe vous répondra sous 48h.',
+      const response = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
-      e.target.reset();
+
+      if (response.ok) {
+        setFormStatus({
+          type: 'success',
+          message: 'Votre message a été envoyé avec succès ! Notre équipe vous répondra sous 48h.',
+        });
+        e.target.reset();
+
+        // Le message disparaît après 5 secondes
+        setTimeout(() => setFormStatus({ type: '', message: '' }), 5000);
+      } else {
+        throw new Error("Erreur lors de l'envoi");
+      }
     } catch (error) {
       setFormStatus({
         type: 'error',
-        message: "Une erreur est survenue lors de l'envoi. Veuillez réessayer plus tard.",
+        message:
+          "Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous contacter directement par email.",
       });
     } finally {
       setIsSubmitting(false);

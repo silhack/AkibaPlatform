@@ -1,4 +1,3 @@
-import { MessageCircle } from 'lucide-react';
 import { FaLinkedinIn } from 'react-icons/fa6';
 import { Link } from 'react-router';
 
@@ -24,15 +23,6 @@ const Footer = () => {
               rel="noopener noreferrer"
             >
               <FaLinkedinIn size={20} />
-            </a>
-            <a
-              href="https://wa.me/33753342598"
-              className="social-link"
-              aria-label="WhatsApp"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MessageCircle size={20} />
             </a>
           </nav>
         </div>
@@ -97,8 +87,8 @@ const Footer = () => {
         <div className="container">
           <p>© 2026 Coreline Alliance. Tous droits réservés.</p>
           <nav className="footer-legal" aria-label="Liens légaux">
-            <a href="/mentions-legales">Mentions légales</a>
-            <a href="/politique-confidentialite">Politique de confidentialité</a>
+            <Link to="/mentions-legales">Mentions légales</Link>
+            <Link to="/politique-confidentialite">Politique de confidentialité</Link>
           </nav>
         </div>
       </div>

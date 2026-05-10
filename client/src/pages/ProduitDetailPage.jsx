@@ -5,48 +5,63 @@ import { Link, useParams } from 'react-router';
 
 // On simule une petite BDD mockée pour l'exemple
 const solutionsDB = {
-  'sol-1': {
-    title: 'CoreFinance Plus',
-    category: 'Finance',
-    desc: "Solution de micro-crédit et financement participatif pour les PME en Afrique de l'Ouest.",
-    image:
-      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80',
-    impacts: [
-      'Accès au crédit pour +500 PME',
-      "Taux d'intérêt réduit de 20%",
-      "Soutien prioritaire à l'entrepreneuriat féminin",
-    ],
-    results: '+2M USD mobilisés',
-    beneficiaries: '15,000 foyers',
-  },
-  'sol-2': {
-    title: 'AgriTech Yield',
+  'neper': {
+    title: 'Projet NEPER (Neper Ventures)',
     category: 'Agro-industrie',
-    desc: 'Optimisation des récoltes via capteurs IoT et analyse de données par IA.',
-    image:
-      'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=1200&q=80',
+    desc: "Accompagnement à la mise en place de 3 unités de transformation agroalimentaire durables (Manioc, Karité) pour créer de la valeur et de l'emploi localement.",
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80',
     impacts: [
-      "Réduction de la consommation d'eau de 30%",
-      'Prédiction précoce des maladies des cultures',
-      'Augmentation des rendements de 40%',
+      '3 unités de transformation opérationnelles',
+      'Création de 150 emplois directs',
+      'Structuration de la filière Karité locale',
     ],
-    results: '+50,000 tonnes sécurisées',
-    beneficiaries: '2,000 coopératives',
+    results: 'Production optimisée x2',
+    beneficiaries: '300 familles rurales',
   },
+  'cassava': {
+    title: 'Projet Cassava (Coopérative Edissou)',
+    category: 'Finance & Inclusion',
+    desc: 'Inclusion financière et numérique pour 100 femmes productrices de la coopérative Edissou de Lolobo. Subvention de la fondation du Crédit Coopératif.',
+    image: 'https://images.unsplash.com/photo-1530836369250-ef71a3a5e48c?auto=format&fit=crop&w=1200&q=80',
+    impacts: [
+      'Digitalisation des paiements pour 100 productrices',
+      'Accès facilité au micro-crédit campagne',
+      'Formation aux outils numériques financiers',
+    ],
+    results: '+25% de revenus nets',
+    beneficiaries: '100 femmes entrepreneures',
+  },
+  'yellior': {
+    title: 'Projet YELLIOR',
+    category: 'Agro-industrie',
+    desc: "Accompagnement stratégique sur la transformation du manioc, de la banane plantain et de l'igname en farines à haute valeur ajoutée.",
+    image: 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=1200&q=80',
+    impacts: [
+      'Certification qualité pour les farines premium',
+      'Déploiement du réseau de distribution national',
+      'Accompagnement à la levée de fonds',
+    ],
+    results: 'Gamme de 5 produits lancée',
+    beneficiaries: '+500 femmes impactées',
+  },
+  'makore': {
+    title: 'Projet MAKORÉ',
+    category: 'Environnement',
+    desc: "Valorisation des produits forestiers non ligneux (Beurre de makoré) par un groupement de femmes de Zaipobly. Lutte contre la déforestation.",
+    image: 'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=80',
+    impacts: [
+      'Préservation de 500 hectares de forêt primaire',
+      'Valorisation économique du Makoré sauvage',
+      'Structuration du groupement de femmes de Zaipobly',
+    ],
+    results: 'Impact déforestation : -15%',
+    beneficiaries: 'Groupement de 50 femmes',
+  }
 };
 
 const ProduitDetailPage = () => {
   const { id } = useParams();
-  const solution = solutionsDB[id] || {
-    title: 'Solution Standard',
-    category: 'Secteur',
-    desc: "Description détaillée de la solution en cours de déploiement par l'alliance Coreline.",
-    image:
-      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80',
-    impacts: ['Impact économique direct', "Création d'emplois locaux", 'Transfert de compétences'],
-    results: "En cours d'évaluation",
-    beneficiaries: 'Région ciblée',
-  };
+  const solution = solutionsDB[id] || solutionsDB['neper'];
 
   useEffect(() => {
     window.scrollTo(0, 0);

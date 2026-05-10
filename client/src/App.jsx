@@ -9,6 +9,11 @@ import ProduitDetailPage from './pages/ProduitDetailPage';
 import ServicePage from './pages/ServicePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import MentionsLegales from './pages/MentionsLegales';
+import PolitiqueConfidentialite from './pages/PolitiqueConfidentialite';
+import NewsDetailPage from './pages/NewsDetailPage';
+import NotFound from './pages/NotFound';
+import ComingSoon from './pages/ComingSoon';
 
 function App() {
   const location = useLocation();
@@ -29,12 +34,16 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/actualites" element={<NewsPage />} />
-        <Route path="/solutions" element={<SolutionsPage />} />
-        <Route path="/solutions/:id" element={<ProduitDetailPage />} />
+        <Route path="/actualites" element={<ComingSoon title="Actualités & Insights" />} />
+        <Route path="/solutions" element={<ComingSoon title="Nos Missions & Portfolio" />} />
+        <Route path="/solutions/:id" element={<ComingSoon title="Détails du Projet" />} />
         <Route path="/services" element={<ServicePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/actualites/:id" element={<ComingSoon title="Détail de l'Article" />} />
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

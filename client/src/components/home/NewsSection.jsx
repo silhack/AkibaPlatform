@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router';
 
 const NewsSection = () => {
   const news = [
@@ -66,13 +67,13 @@ const NewsSection = () => {
                 <p>{item.description}</p>
                 <div className="news-meta">
                   <span className="news-date">{item.date}</span>
-                  <a
-                    href="#"
+                  <Link
+                    to={`/actualites/iywf-2026`}
                     className="news-link"
                     aria-label={`Lire la suite de l'article : ${item.title}`}
                   >
                     Lire la suite
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

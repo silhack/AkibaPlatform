@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --primary: #0052cc; /* Bright Institutional Blue */
-  --primary-dark: #003d99;
-  --accent: #d4af37; /* Premium Gold */
-  --accent-light: #fef9c3; /* Light gold background */
-  --gold: #d4af37; /* Success/Gold highlights */
-  --secondary: #1a5a99; /* Luminous Navy */
+  --primary: #1b5798; /* True Blue */
+  --primary-dark: #123d6b;
+  --accent: #cda141; /* True Gold */
+  --accent-light: #fdf8e7; /* Light gold background */
+  --gold: #cda141; /* True Gold */
+  --secondary: #061e63; /* True Dark Blue */
   --white: #ffffff;
-  --gray-50: #f4f7fa; /* Blue tinted white */
-  --gray-100: #e6edf4; /* Light Blue-Gray */
+  --gray-50: #f4f7fa;
+  --gray-100: #e6edf4;
   --gray-200: #cddbe8;
-  --gray-600: #5c7b99; /* Medium Blue-Gray */
+  --gray-600: #5c7b99;
   --glass: rgba(255, 255, 255, 0.82);
   --glass-border: rgba(255, 255, 255, 0.4);
-  --shadow-premium: 0 25px 50px -12px rgba(0, 39, 77, 0.12);
+  --shadow-premium: 0 25px 50px -12px rgba(6, 30, 99, 0.12);
   --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
   --transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-  --radius-lg: 1.5rem; /* Slightly tighter radius for professional feel */
+  --radius-lg: 1.5rem;
   --radius-md: 1rem;
 }
 
@@ -25,7 +25,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 html {
@@ -905,8 +905,8 @@ header.scrolled {
   box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.25);
 }
 
-.contact-form .form-group:nth-child(3),
-.contact-form .form-group:nth-child(4),
+.contact-form .full-width,
+
 .contact-form .btn-contact {
   grid-column: span 2;
 }
@@ -1514,8 +1514,8 @@ footer {
   box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.25);
 }
 
-.contact-form .form-group:nth-child(3),
-.contact-form .form-group:nth-child(4),
+.contact-form .full-width,
+
 .contact-form .btn-contact {
   grid-column: span 2;
 }
@@ -1567,4 +1567,14 @@ footer {
   padding: 1rem;
   border-radius: 8px;
   font-weight: 600;
+}
+
+/* Contact form overrides */
+.contact-form .full-width {
+  grid-column: span 2;
+}
+
+.contact-form textarea {
+  min-height: 180px !important;
+  resize: vertical;
 }

@@ -49,9 +49,11 @@ const Portfolio = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="service-icon">{project.icon}</div>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
+              <Link to={`/solutions/${project.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div className="service-icon">{project.icon}</div>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+              </Link>
             </motion.div>
           ))}
         </div>

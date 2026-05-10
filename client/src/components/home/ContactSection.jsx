@@ -7,14 +7,42 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    // Honeypot check
+    if (data.website) return;
+
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    // Utilise l'ID de l'environnement ou le placeholder pour le développement
+    const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID || 'VOTRE_ID_FORMSPREE';
+    const FORMSPREE_URL = `https://formspree.io/f/${FORMSPREE_ID}`;
+
+    try {
+      const response = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsSent(true);
+        setFormState({ name: '', email: '', subject: '', message: '' });
+        e.target.reset();
+        // Le message disparaît après 5 secondes
+        setTimeout(() => setIsSent(false), 5000);
+      } else {
+        throw new Error("Erreur lors de l'envoi");
+      }
+    } catch (error) {
+      alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.');
+    } finally {
       setIsSubmitting(false);
-      setIsSent(true);
-      setFormState({ name: '', email: '', subject: '', message: '' });
-    }, 1500);
+    }
   };
 
   return (
@@ -69,11 +97,42 @@ const ContactSection = () => {
           transition={{ duration: 0.8 }}
           onSubmit={handleSubmit}
         >
+          {/* Honeypot field */}
+          <input
+            type="text"
+            name="website"
+            style={{ display: 'none' }}
+            tabIndex="-1"
+            autoComplete="off"
+          />
+
+          {isSent && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{
+                gridColumn: 'span 2',
+                padding: '1rem',
+                borderRadius: '8px',
+                marginBottom: '1rem',
+                backgroundColor: '#fef9c3',
+                color: '#854d0e',
+                fontSize: '0.9rem',
+                fontWeight: '600',
+                textAlign: 'center',
+                border: '1px solid #fef08a',
+              }}
+            >
+              Message envoyé ! Nous vous répondrons sous 24h.
+            </motion.div>
+          )}
+
           <div className="form-group">
             <label htmlFor="name">Nom complet</label>
             <input
               type="text"
               id="name"
+              name="name"
               placeholder="Jean Dupont"
               required
               value={formState.name}
@@ -85,16 +144,18 @@ const ContactSection = () => {
             <input
               type="email"
               id="email"
+              name="email"
               placeholder="jean@entreprise.com"
               required
               value={formState.email}
               onChange={e => setFormState({ ...formState, email: e.target.value })}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group full-width">
             <label htmlFor="subject">Je souhaite échanger sur :</label>
             <select
               id="subject"
+              name="subject"
               required
               value={formState.subject}
               onChange={e => setFormState({ ...formState, subject: e.target.value })}
@@ -107,29 +168,22 @@ const ContactSection = () => {
               <option>Autre demande</option>
             </select>
           </div>
-          <div className="form-group">
+          <div className="form-group full-width">
             <label htmlFor="message">Message</label>
             <textarea
               id="message"
-              rows="4"
-              placeholder="Décrivez votre projet..."
+              name="message"
+              rows="5"
+              placeholder="Détaillez votre demande ici..."
               required
               value={formState.message}
               onChange={e => setFormState({ ...formState, message: e.target.value })}
             ></textarea>
           </div>
 
-          {isSent ? (
-            <div className="form-success-wrapper">
-              <p className="form-success-message">
-                Message envoyé ! Nous vous répondrons sous 24h.
-              </p>
-            </div>
-          ) : (
-            <button type="submit" className="btn-contact" disabled={isSubmitting}>
-              {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
-            </button>
-          )}
+          <button type="submit" className="btn-contact" disabled={isSubmitting}>
+            {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
+          </button>
         </motion.form>
       </div>
     </section>

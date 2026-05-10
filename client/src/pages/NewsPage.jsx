@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
+import { Link } from 'react-router';
 import SEO from '../components/common/SEO';
 
 const NewsPage = () => {
@@ -112,13 +113,13 @@ const NewsPage = () => {
                   <p>{item.description}</p>
                   <div className="news-meta">
                     <span className="news-date">{item.date}</span>
-                    <a
-                      href="#"
+                    <Link
+                      to={`/actualites/iywf-2026`}
                       className="news-link"
                       aria-label={`Lire la suite de l'article : ${item.title}`}
                     >
                       Lire la suite →
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </motion.article>

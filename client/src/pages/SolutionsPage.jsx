@@ -213,7 +213,21 @@ const SolutionsPage = () => {
                     >
                       {sol.desc}
                     </p>
-                    {/* On cache le lien "En savoir plus" car nous n'avons pas fait les routes détaillées pour tous, mais ça reste préparé */}
+                    <Link 
+                      to={`/solutions/${sol.id}`} 
+                      className="btn-link" 
+                      style={{ 
+                        marginTop: 'auto', 
+                        color: 'var(--primary)', 
+                        fontWeight: '700', 
+                        textDecoration: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem'
+                      }}
+                    >
+                      En savoir plus →
+                    </Link>
                   </div>
                 </motion.div>
               );
